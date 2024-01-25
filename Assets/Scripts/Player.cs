@@ -8,11 +8,20 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float speed;
-   
-    private bool isRagdoll;
-    
+    public int maxHp = 5;
+    public int currentHP = 5;
+    public int damage = 1;
 
-    
+    public UnityEvent onDamage = new UnityEvent();
+    public UnityEvent onDeath = new UnityEvent();
+
+    private bool isRagdoll;
+
+    private void Start()
+    {
+        currentHP = maxHp;
+    }
+
     public    void OnEnable()
     {
        
@@ -33,4 +42,12 @@ public class Player : MonoBehaviour
         
     }
 
+    internal void takeDamage(int damage)
+    {
+        currentHP -= damage;
+        if(currentHP <= 0)
+            onDeath?.Invoke();
+        else
+            onDamage?.Invoke();
+    }
 }
