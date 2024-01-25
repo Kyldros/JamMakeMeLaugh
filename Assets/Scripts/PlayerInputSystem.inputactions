@@ -24,6 +24,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Sprint",
+                    "type": "Button",
+                    "id": "6e5ecaed-999c-428b-874a-cb790414d786",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Ragdoll",
                     "type": "Button",
                     "id": "9e9ba6cd-f232-42df-80dd-749caceb1526",
@@ -207,7 +216,7 @@
                 {
                     "name": "",
                     "id": "4a5130cd-744e-4ef9-a436-804a5c2ba711",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -229,7 +238,7 @@
                 {
                     "name": "",
                     "id": "9be28b7b-73c8-4ff3-9aa7-5ffaa77ab4dc",
-                    "path": "<Keyboard>/shift",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -278,6 +287,28 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Option",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6f64b77f-d902-4a4e-a252-39437855eaeb",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6f25e5ee-d67e-4dd0-9a64-2274ec870f1b",
+                    "path": "<Gamepad>/leftStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
