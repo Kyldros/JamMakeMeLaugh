@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class HoleDeathBox : MonoBehaviour
 {
+    public Transform teleportDestination;
+    
     private void OnTriggerEnter(Collider other)
     {
         Player player = other.gameObject.GetComponent<Player>();
         if (player != null)
         {
-            player.takeDamage(damage);
+            player.transform.position=teleportDestination.position;
         }
     }
 }
