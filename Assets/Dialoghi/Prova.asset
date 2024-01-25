@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49e62e817c0abb04fb243da4b9768517, type: 3}
+  m_Name: Prova
+  m_EditorClassIdentifier: 
+  dialogueList:
+  - haveReplyOptions: 0
+    pinnyText: primocoso
+    option1:
+      text: 
+      targetIndex: 0
+    option2:
+      text: 
+      targetIndex: 0
+    option3:
+      text: 
+      targetIndex: 0
+  - haveReplyOptions: 1
+    pinnyText: rispo1
+    option1:
+      text: cacca
+      targetIndex: 2
+    option2:
+      text: dumb
+      targetIndex: 5
+    option3:
+      text: asss
+      targetIndex: 8
+  - haveReplyOptions: 0
+    pinnyText: parte2
+    option1:
+      text: 
+      targetIndex: 0
+    option2:
+      text: 
+      targetIndex: 0
+    option3:
+      text: 
+      targetIndex: 0
+  - haveReplyOptions: 0
+    pinnyText: parte3
+    option1:
+      text: 
+      targetIndex: 0
+    option2:
+      text: 
+      targetIndex: 0
+    option3:
+      text: 
+      targetIndex: 0
+  - haveReplyOptions: 1
+    pinnyText: parte4
+    option1:
+      text: dsds
+      targetIndex: 9
+    option2:
+      text: dfdfd
+      targetIndex: 9
+    option3:
+      text: dfdf
+      targetIndex: 9
+  - haveReplyOptions: 1
+    pinnyText: parte5
+    option1:
+      text: to9
+      targetIndex: 9
+    option2:
+      text: to9
+      targetIndex: 9
+    option3:
+      text: to9
+      targetIndex: 9
+  - haveReplyOptions: 0
+    pinnyText: 
+    option1:
+      text: 
+      targetIndex: 0
+    option2:
+      text: 
+      targetIndex: 0
+    option3:
+      text: 
+      targetIndex: 0
+  - haveReplyOptions: 0
+    pinnyText: 
+    option1:
+      text: 
+      targetIndex: 0
+    option2:
+      text: 
+      targetIndex: 0
+    option3:
+      text: 
+      targetIndex: 0
+  - haveReplyOptions: 0
+    pinnyText: 
+    option1:
+      text: 
+      targetIndex: 0
+    option2:
+      text: 
+      targetIndex: 0
+    option3:
+      text: 
+      targetIndex: 0
+  - haveReplyOptions: 0
+    pinnyText: fine
+    option1:
+      text: 
+      targetIndex: 0
+    option2:
+      text: 
+      targetIndex: 0
+    option3:
+      text: 
+      targetIndex: 0
