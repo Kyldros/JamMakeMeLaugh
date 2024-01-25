@@ -152,15 +152,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 166364798}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 595b2f83e00af624697b76303b4a240d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 0
   ragdollSpeed: 0
+  sprintSpeed: 0
+  mesh: {fileID: 0}
+  boneToMove: {fileID: 0}
   rb: {fileID: 0}
-  ragdollRb: []
+  coll: {fileID: 0}
   maxHp: 5
   currentHP: 5
   damage: 1
@@ -340,7 +343,7 @@ MonoBehaviour:
       - m_Target: {fileID: 350489777}
         m_TargetAssemblyTypeName: PinnyParle, Assembly-CSharp
         m_MethodName: GoOn
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -407,6 +410,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: d8d6539f-ad7a-4453-9ab5-14d3a9afc1d7
     m_ActionName: PinnyDialogue/Option
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6e5ecaed-999c-428b-874a-cb790414d786
+    m_ActionName: Player/Sprint[/Keyboard/shift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PinnyDialogue
