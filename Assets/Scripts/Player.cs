@@ -8,8 +8,7 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float speed;
-    [SerializeField] PlayerInputSystem inputActions;
-
+   
     private bool isRagdoll;
     
 
