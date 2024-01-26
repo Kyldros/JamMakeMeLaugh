@@ -13,11 +13,15 @@ MonoBehaviour:
   m_Name: penny1
   m_EditorClassIdentifier: 
   frasi:
-  - frase: 
+  - frase: frasi
     sprite: {fileID: 0}
-  - frase: 
+  - frase: frase2
     sprite: {fileID: 0}
-  hasReply: 0
+  - frase: frase3
+    sprite: {fileID: 0}
+  - frase: frase4
+    sprite: {fileID: 0}
+  hasReply: 1
   risposta1: {fileID: 11400000, guid: 212dddfe07733754eaee9e6e0084c49e, type: 2}
-  risposta2: {fileID: 11400000, guid: 212dddfe07733754eaee9e6e0084c49e, type: 2}
-  risposta3: {fileID: 11400000, guid: 212dddfe07733754eaee9e6e0084c49e, type: 2}
+  risposta2: {fileID: 11400000, guid: be0af888060018f42a1a646c74bef56a, type: 2}
+  risposta3: {fileID: 11400000, guid: 909ce85d6c1ae1343abdfe74fe57f57e, type: 2}

@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bb04a4861429be438e018c8b09c9d56, type: 3}
   m_Name: EndDialogue
   m_EditorClassIdentifier: 
-  frasi: []
+  frasi:
+  - frase: Fine1
+    sprite: {fileID: 0}
+  - frase: FineFinale
+    sprite: {fileID: 0}
   hasReply: 0
   risposta1: {fileID: 0}
   risposta2: {fileID: 0}
