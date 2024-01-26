@@ -1,14 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-//[CreateAssetMenu(fileName = "Dialogo", menuName = "Dialoghi/Frasi/Dialogo")]
+
 public class DialogueFlowV2 : MonoBehaviour
 {
-    public FrasiDiPinny fraseIniziale;
+    public FrasiDiPinny standardPinny;
 
     public Image pinnyimage;
     public TextMeshProUGUI pinnySpeech;
@@ -24,7 +23,7 @@ public class DialogueFlowV2 : MonoBehaviour
 
     private void Start()
     {
-        SetNewPrhase(fraseIniziale);
+        SetNewPrhase(standardPinny);
     }
 
     public void StartPinnyWithPhrase(FrasiDiPinny startingPhrase)
@@ -46,6 +45,7 @@ public class DialogueFlowV2 : MonoBehaviour
         else 
             Debug.Log("Frase non trovata");
 
+       UnselectAllButton();
     }
 
     private void SetTextAndImage()
@@ -87,11 +87,13 @@ public class DialogueFlowV2 : MonoBehaviour
     private void EndDialogue()
     {
         GameManager.Instance.ClosePinny();
+        currentFrase = standardPinny;
     }
 
     private void DisableReply()
     {
         replyPanel.SetActive(false);
+        GameManager.Instance.SetCursorOff();
     }
 
     private void EnableReply()
@@ -100,6 +102,7 @@ public class DialogueFlowV2 : MonoBehaviour
         option1.text = currentFrase.risposta1.GetReply();
         option2.text = currentFrase.risposta2.GetReply();
         option3.text = currentFrase.risposta3.GetReply();
+        GameManager.Instance.SetCursorOn();
     }
 
     public void GoOn(InputAction.CallbackContext context)
@@ -116,20 +119,40 @@ public class DialogueFlowV2 : MonoBehaviour
 
     public void SelectOption1(InputAction.CallbackContext context)
     {
-        if(isLastFrase && currentFrase.hasReply && context.canceled)
-            SetNewPrhase(currentFrase.risposta1.pinnyReply);
+        if (isLastFrase && currentFrase.hasReply && context.canceled)
+            ClickOption1();
+    }
+
+    public void ClickOption1()
+    {
+        SetNewPrhase(currentFrase.risposta1.pinnyReply);
     }
 
     public void SelectOption2(InputAction.CallbackContext context)
     {
         if (isLastFrase && currentFrase.hasReply && context.canceled)
-            SetNewPrhase(currentFrase.risposta2.pinnyReply);
+            ClickOption2();
+    }
+
+    public void ClickOption2()
+    {
+        SetNewPrhase(currentFrase.risposta2.pinnyReply);
     }
 
     public void SelectOption3(InputAction.CallbackContext context)
     {
         if (isLastFrase && currentFrase.hasReply && context.canceled)
-            SetNewPrhase(currentFrase.risposta3.pinnyReply);
+            ClickOption3();
+    }
+
+    public void ClickOption3()
+    {
+        SetNewPrhase(currentFrase.risposta3.pinnyReply);
+    }
+
+    private void UnselectAllButton()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
 }

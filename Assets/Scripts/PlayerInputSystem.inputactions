@@ -426,24 +426,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Option",
-                    "type": "Button",
-                    "id": "d8d6539f-ad7a-4453-9ab5-14d3a9afc1d7",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Look",
-                    "type": "Value",
-                    "id": "8c82f404-41aa-4ad4-b674-fc8dd075c6ee",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Move",
                     "type": "Value",
                     "id": "3c88289e-0b95-4cbe-9408-1073dbd0eade",
@@ -522,28 +504,6 @@
                 },
                 {
                     "name": "",
-                    "id": "176ae93d-62c4-443d-acdc-907ca175cf32",
-                    "path": "<Gamepad>/select",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Option",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ac57f62e-d75e-4d39-957d-4342fbbd29d6",
-                    "path": "<Keyboard>/i",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Option",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "c4bf57a2-b521-4fba-9042-ca4206e7fb95",
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
@@ -583,28 +543,6 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Option3",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b90a72cb-a3d9-48e3-a0f5-b88b90a8e76a",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1baeedc5-9ef6-4615-8b76-c2226da6e31f",
-                    "path": "<Pointer>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -681,42 +619,6 @@
             "id": "ad072e09-2259-4b7c-b6d6-9d5ef8be6e7a",
             "actions": [
                 {
-                    "name": "GoOn",
-                    "type": "Button",
-                    "id": "f1410312-75cd-48bc-9201-dddfe63ffcf0",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Option1",
-                    "type": "Button",
-                    "id": "5f97298f-cc20-40b1-abd7-b8069b5bcf0b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Option2",
-                    "type": "Button",
-                    "id": "ad505c5f-b1f3-4a8b-9399-c60ab6a55827",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Option3",
-                    "type": "Button",
-                    "id": "9956a9ce-7a5f-41d0-9e00-e38477d66b5e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Menu",
                     "type": "Button",
                     "id": "289723b1-f278-4fe0-8832-edd5daefd110",
@@ -724,24 +626,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Option",
-                    "type": "Button",
-                    "id": "7875d06a-e46b-40f0-b936-f971322212f1",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Look",
-                    "type": "Value",
-                    "id": "c41bce5f-11b1-4f82-b7b5-6ed5d5761992",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
                 },
                 {
                     "name": "Move",
@@ -754,50 +638,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "efe13612-c8b6-4f66-bd56-ca1e236c0609",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "GoOn",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "87e4ed51-fa67-4dc9-910d-8618d4a82121",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "GoOn",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8001245b-2e9b-46d6-9a28-3c18c2eddded",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Option1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "46751f31-25f2-4e04-b351-117a5d8a64e6",
-                    "path": "<Keyboard>/1",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Option1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "958336cf-53fe-48f4-bd9b-6ff13c94709b",
@@ -817,94 +657,6 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Menu",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "dd8e308f-5253-4699-bded-853b602d26c1",
-                    "path": "<Gamepad>/select",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Option",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "73e0cfed-d05f-44f0-be22-52ec1f113add",
-                    "path": "<Keyboard>/i",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Option",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4743ba43-59ea-41fc-9cb9-2fa6fa02186b",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Option2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7dde91c3-d39a-4d67-aeba-2632cf7b59e8",
-                    "path": "<Keyboard>/2",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Option2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "80b10cad-c2ca-43bd-a6d6-2b826ba467bd",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Option3",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c891e47a-eb76-44ad-b346-e027301a8c26",
-                    "path": "<Keyboard>/3",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Option3",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f95e7e11-9777-44ec-aebb-cacc584cf2a3",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "aa0f76de-4fe5-46ac-8c5d-d2438ca5589b",
-                    "path": "<Pointer>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
