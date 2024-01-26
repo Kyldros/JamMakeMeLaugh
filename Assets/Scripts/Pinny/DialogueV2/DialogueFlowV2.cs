@@ -9,8 +9,7 @@ using UnityEngine.UI;
 public class DialogueFlowV2 : MonoBehaviour
 {
     public FrasiDiPinny fraseIniziale;
-    //public List<FrasiDiPinny> frasi = new List<FrasiDiPinny>();
-    //public List<Risposte> risposte = new List<Risposte>();
+
     public Image pinnyimage;
     public TextMeshProUGUI pinnySpeech;
     public TextMeshProUGUI option1;
@@ -28,6 +27,10 @@ public class DialogueFlowV2 : MonoBehaviour
         SetNewPrhase(fraseIniziale);
     }
 
+    public void StartPinnyWithPhrase(FrasiDiPinny startingPhrase)
+    {
+        SetNewPrhase(startingPhrase);
+    }
 
     void SetNewPrhase(FrasiDiPinny frase)
     {
@@ -83,7 +86,7 @@ public class DialogueFlowV2 : MonoBehaviour
 
     private void EndDialogue()
     {
-        Debug.Log("End dialogue");
+        GameManager.Instance.ClosePinny();
     }
 
     private void DisableReply()
