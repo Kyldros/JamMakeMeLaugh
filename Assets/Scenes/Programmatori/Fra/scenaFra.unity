@@ -339,8 +339,8 @@ MonoBehaviour:
   walkSpeed: 10
   ragdollSpeed: 7
   sprintSpeed: 15
-  dashMulty: 2
-  dashDuration: 2
+  dashMulty: 5
+  dashDuration: 1
   dashCooldown: 4
   maxHp: 5
   damage: 1
