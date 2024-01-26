@@ -16,19 +16,61 @@ public class DialogueFlowV2 : MonoBehaviour
     public TextMeshProUGUI option3;
 
     public GameObject replyPanel;
+    private ButtonSelection currentSelection;
 
     private int dialogueIndex = 0;
     private FrasiDiPinny currentFrase;
     private bool isLastFrase = false;
+    private bool called = false;
 
     private void Start()
     {
+        currentSelection = replyPanel.GetComponent<ButtonSelection>();
         SetNewPrhase(standardPinny);
+    }
+
+    public void Selection(InputAction.CallbackContext context)
+    {
+        if (context.ReadValue<Vector2>().y > 0.95 && !called)
+        {
+            SelectionUp();
+            called = true;
+        }
+        
+        if (context.ReadValue<Vector2>().y < -0.95 && !called)
+        {
+            SelectionDown();
+            called = true;
+        }
+
+        if (context.ReadValue<Vector2>().y < 0.95 && context.ReadValue<Vector2>().y > -0.95)
+            called = false;
+    }
+
+    public void SelectionUp()
+    {
+        if (currentSelection != null)
+        {
+            currentSelection.SelectButton(currentSelection.currentIndex - 1);
+        }
+    }
+
+    public void SelectionDown()
+    {
+        if (currentSelection != null)
+        {
+            currentSelection.SelectButton(currentSelection.currentIndex + 1);
+        }
     }
 
     public void StartPinnyWithPhrase(FrasiDiPinny startingPhrase)
     {
         SetNewPrhase(startingPhrase);
+    }
+
+    public void StartStandardPinny()
+    {
+        SetNewPrhase(standardPinny);
     }
 
     void SetNewPrhase(FrasiDiPinny frase)
@@ -113,6 +155,11 @@ public class DialogueFlowV2 : MonoBehaviour
                 EndDialogue();
             else if (!isLastFrase)
                 NextDialogue();
+            else
+            {
+                if (EventSystem.current.currentSelectedGameObject != null)
+                    EventSystem.current.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
+            }
         }
         
     }

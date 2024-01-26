@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -67,6 +68,7 @@ public class GameManager : MonoBehaviour
         {
             menu.gameObject.SetActive(true);
             ChangeInputScheme(InputScheme.Menu);
+            SetCursorOn();
         }
 
     }
@@ -74,8 +76,10 @@ public class GameManager : MonoBehaviour
     {
         if (menu != null && menu.gameObject.activeInHierarchy) 
         { 
-                menu.gameObject.SetActive(false);
-                ChangeInputScheme(playScheme);
+            menu.gameObject.SetActive(false);
+            ChangeInputScheme(playScheme);
+            SetCursorOff();
+            SetIputActionState(true);
         }
     }
     public void SetCursorOn()
@@ -94,8 +98,22 @@ public class GameManager : MonoBehaviour
     {
         if (playerInput != null)
             ChangeInputScheme(InputScheme.Menu);
+        SetCursorOn();
+        SetIputActionState(false);
     }
 
+    private void SetIputActionState(bool active)
+    {
+        InputAction actionToDisable = playerInput.actions.FindAction("Menu");
+
+        if (actionToDisable != null)
+        {
+            if(active)
+                actionToDisable.Enable();
+            else
+                actionToDisable.Disable();
+        }
+    }
 }
 
 public enum InputScheme
