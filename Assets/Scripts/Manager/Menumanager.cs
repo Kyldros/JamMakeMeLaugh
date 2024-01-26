@@ -11,7 +11,6 @@ public class MenuManager : MonoBehaviour
 
     public ButtonSelection menuSelection;
     public ButtonSelection confirmationSelection;
-    private bool gameStarted = false;
     private ButtonSelection currentSelection;
 
     private void Start()

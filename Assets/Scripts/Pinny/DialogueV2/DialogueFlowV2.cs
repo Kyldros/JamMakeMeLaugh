@@ -21,19 +21,30 @@ public class DialogueFlowV2 : MonoBehaviour
     private int dialogueIndex = 0;
     private FrasiDiPinny currentFrase;
     private bool isLastFrase = false;
+    private bool called = false;
 
     private void Start()
     {
-        SetNewPrhase(standardPinny);
         currentSelection = replyPanel.GetComponent<ButtonSelection>();
+        SetNewPrhase(standardPinny);
     }
 
     public void Selection(InputAction.CallbackContext context)
     {
-        if (context.ReadValue<Vector2>().y > 0)
+        if (context.ReadValue<Vector2>().y > 0.95 && !called)
+        {
             SelectionUp();
-        else if (context.ReadValue<Vector2>().y < 0)
+            called = true;
+        }
+        
+        if (context.ReadValue<Vector2>().y < -0.95 && !called)
+        {
             SelectionDown();
+            called = true;
+        }
+
+        if (context.ReadValue<Vector2>().y < 0.95 && context.ReadValue<Vector2>().y > -0.95)
+            called = false;
     }
 
     public void SelectionUp()
@@ -55,6 +66,11 @@ public class DialogueFlowV2 : MonoBehaviour
     public void StartPinnyWithPhrase(FrasiDiPinny startingPhrase)
     {
         SetNewPrhase(startingPhrase);
+    }
+
+    public void StartStandardPinny()
+    {
+        SetNewPrhase(standardPinny);
     }
 
     void SetNewPrhase(FrasiDiPinny frase)
