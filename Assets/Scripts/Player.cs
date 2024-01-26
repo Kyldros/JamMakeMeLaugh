@@ -101,6 +101,7 @@ public class Player : MonoBehaviour
         }
         else
         {
+            rb.velocity = Vector3.zero;
             //dash
             Move2(lastMovement);
         }
