@@ -3780,6 +3780,16 @@ PrefabInstance:
       propertyPath: audioManager
       value: 
       objectReference: {fileID: 2076009643}
+    - target: {fileID: 1512259953205206923, guid: 4585279db2173b64fad7aa3912e0b4c3,
+        type: 3}
+      propertyPath: openMenuSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 00b571274103bed43bc512e15750cf6e, type: 3}
+    - target: {fileID: 1512259953205206923, guid: 4585279db2173b64fad7aa3912e0b4c3,
+        type: 3}
+      propertyPath: closeMenuSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 2582e3bd34b9ca345abfd3dbf9be2a1a, type: 3}
     - target: {fileID: 3588403536559940597, guid: 4585279db2173b64fad7aa3912e0b4c3,
         type: 3}
       propertyPath: m_Name
@@ -4915,6 +4925,8 @@ MonoBehaviour:
   confirmationPanel: {fileID: 949488151}
   menuSelection: {fileID: 1755933756}
   confirmationSelection: {fileID: 949488152}
+  selectionMenu:
+  - {fileID: 8300000, guid: 1bc4db66f1809914c83c179414a558e7, type: 3}
 --- !u!114 &1200683378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7684,8 +7696,11 @@ MonoBehaviour:
   option2: {fileID: 1532404051}
   option3: {fileID: 9282311}
   replyPanel: {fileID: 906133903}
-  selectionAudio: []
-  pinnyAudio: []
+  selectionAudio:
+  - {fileID: 8300000, guid: 1bc4db66f1809914c83c179414a558e7, type: 3}
+  pinnyAudio:
+  - {fileID: 8300000, guid: 3c4a2662e5b72e3439a20efb8f029a08, type: 3}
+  - {fileID: 8300000, guid: 82e79eb1808c89c4da8aef27263158c8, type: 3}
 --- !u!114 &2061610624
 MonoBehaviour:
   m_ObjectHideFlags: 0
