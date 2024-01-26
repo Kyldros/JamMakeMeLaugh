@@ -70,6 +70,19 @@ public class GameManager : MonoBehaviour
             }   
         }
     }
+
+    public void SetCursorOn()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+    }
+
+    public void SetCursorOff()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
 }
 
 public enum InputScheme
