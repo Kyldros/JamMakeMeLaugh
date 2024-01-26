@@ -68,35 +68,41 @@ public class PinnyParle : MonoBehaviour
 
     public void GoOn(InputAction.CallbackContext gigi)
     {
-        if (!currentDialogue.haveReplyOptions)
+        if (gigi.canceled)
         {
-            dialogueIndex++;
-            if (dialogueIndex >= dialogueFlow.dialogueList.Count)
+            if (!currentDialogue.haveReplyOptions)
             {
-                EndDialogue();
-            }
+                dialogueIndex++;
+                if (dialogueIndex >= dialogueFlow.dialogueList.Count)
+                {
+                    EndDialogue();
+                    return;
+                }
 
-            NextDialogue(dialogueFlow.dialogueList[dialogueIndex]);
+                NextDialogue(dialogueFlow.dialogueList[dialogueIndex]);
+            }
+            Debug.Log("Go on");
         }
-        Debug.Log("Go on");
+        
+        
     }
 
-    public void SelectOption1()
+    public void SelectOption1(InputAction.CallbackContext context)
     {
-        if(currentDialogue.haveReplyOptions)
+        if(currentDialogue.haveReplyOptions && context.canceled)
             NextDialogue(dialogueFlow.dialogueList[OptionChosen(DilogueOptions.Option1)]);
         
     }
 
-    public void SelectOption2()
+    public void SelectOption2(InputAction.CallbackContext context)
     {
-        if (currentDialogue.haveReplyOptions)
+        if (currentDialogue.haveReplyOptions && context.canceled)
             NextDialogue(dialogueFlow.dialogueList[OptionChosen(DilogueOptions.Option2)]);
     }
 
-    public void SelectOption3()
+    public void SelectOption3(InputAction.CallbackContext context)
     {
-        if (currentDialogue.haveReplyOptions)
+        if (currentDialogue.haveReplyOptions && context.canceled)
             NextDialogue(dialogueFlow.dialogueList[OptionChosen(DilogueOptions.Option3)]);
     }
 

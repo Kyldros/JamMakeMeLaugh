@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4687d289cedefb14f8ef807d913d2630, type: 3}
+  m_Name: risposta1
+  m_EditorClassIdentifier: 
+  risposte:
+  - risp2
+  - risp1
+  - risp3
+  - risp4
+  - risp4
+  pinnyReply: {fileID: 11400000, guid: e25f44c2033bd0e4cb462ab92a340d07, type: 2}
