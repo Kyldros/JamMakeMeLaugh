@@ -1,18 +1,63 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class Menumanager : MonoBehaviour
+public class MenuManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public TextMeshProUGUI startText;
+    public GameObject confirmationPanel;
+
+    public ButtonSelection menuSelection;
+    public ButtonSelection confirmationSelection;
+
+    private ButtonSelection currentSelection;
+
+    public void SelectionUp(InputAction.CallbackContext context)
     {
-        
+        if(currentSelection != null && context.canceled)
+        {
+            currentSelection.SelectButton(currentSelection.currentIndex - 1);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SelectionDown(InputAction.CallbackContext context)
     {
-        
+        if (currentSelection != null && context.canceled)
+        {
+            currentSelection.SelectButton(currentSelection.currentIndex + 1);
+        }
     }
+
+    public void SetContinue()
+    {
+        if (startText != null)
+        {
+            startText.text = "Continue";
+        }
+    }
+
+    public void SetStart()
+    {
+        if (startText != null)
+        {
+            startText.text = "Start";
+        }
+    }
+
+    public void ExitMenu()
+    {
+        confirmationPanel.SetActive(true);
+        currentSelection = confirmationSelection;
+    }
+    public void ExitExitMenu()
+    {
+        confirmationPanel.SetActive(false);
+        currentSelection = menuSelection;
+    }
+
+    public void ExitConfirmation() 
+    { 
+        Application.Quit();
+    }
+
 }

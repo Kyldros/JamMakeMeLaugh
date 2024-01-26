@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,7 +8,9 @@ public class GameManager : MonoBehaviour
     public GameObject pinny;
     public GameObject menu;
 
-    InputScheme playScheme = InputScheme.Menu;
+    public List<GameObject> wallist = new();
+
+    InputScheme playScheme = InputScheme.Player;
 
     private static GameManager _instance;
     public static GameManager Instance
@@ -50,26 +53,29 @@ public class GameManager : MonoBehaviour
     public void ChangeInputScheme(InputScheme scheme)
     {
         playerInput.SwitchCurrentActionMap(scheme.ToString());
-        if(scheme != InputScheme.Menu)
+        if (scheme != InputScheme.Menu)
             playScheme = scheme;
     }
-    
-    public void OpenCloseMenu()
+
+    public void OpenMenu()
     {
-        if(menu != null)
+        if (menu != null && !menu.gameObject.activeInHierarchy)
         {
-            if (menu.gameObject.activeInHierarchy)
-            {
+            menu.gameObject.SetActive(true);
+            ChangeInputScheme(InputScheme.Menu);
+        }
+
+    }
+    public void CloseMenu()
+    {
+        if (menu != null && menu.gameObject.activeInHierarchy) 
+        { 
                 menu.gameObject.SetActive(false);
                 ChangeInputScheme(playScheme);
-            }
-            else
-            {
-                menu.gameObject.SetActive(true);
-                ChangeInputScheme(InputScheme.Menu);
-            }   
         }
     }
+
+    
 
     public void SetCursorOn()
     {
@@ -81,6 +87,13 @@ public class GameManager : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.None;
+    }
+
+
+    private void Start()
+    {
+        if (playerInput != null)
+            ChangeInputScheme(InputScheme.Menu);
     }
 
 }
