@@ -8,6 +8,12 @@ public class GameManager : MonoBehaviour
     public PlayerInput playerInput;
     public GameObject pinny;
     public GameObject menu;
+    public bool isPaused { get; private set; } = false;
+    public AudioManager audioManager;
+    public AudioClip openMenuSound;
+    public AudioClip closeMenuSound;
+    public AudioClip openPinnySound;
+    public AudioClip closePinnySound;
 
     public List<TriggerWall> wallList = new();
 
@@ -46,6 +52,7 @@ public class GameManager : MonoBehaviour
         {
             pinny.gameObject.SetActive(true);
             ChangeInputScheme(InputScheme.PinnyDialogue);
+            audioManager.PlayAudio(openPinnySound);
         }
     }
     public void ClosePinny()
@@ -54,11 +61,21 @@ public class GameManager : MonoBehaviour
         {
             pinny.gameObject.SetActive(false);
             ChangeInputScheme(InputScheme.Player);
+            audioManager.PlayAudio(closePinnySound);
         }
     }
     public void ChangeInputScheme(InputScheme scheme)
     {
         playerInput.SwitchCurrentActionMap(scheme.ToString());
+        if(scheme == InputScheme.Player)
+        {
+            SetPauseOff();
+        }
+        else
+        {
+            SetPauseOn();   
+        }
+
         if (scheme != InputScheme.Menu)
             playScheme = scheme;
     }
@@ -69,6 +86,7 @@ public class GameManager : MonoBehaviour
             menu.gameObject.SetActive(true);
             ChangeInputScheme(InputScheme.Menu);
             SetCursorOn();
+            audioManager.PlayAudio(openMenuSound);
         }
 
     }
@@ -80,6 +98,7 @@ public class GameManager : MonoBehaviour
             ChangeInputScheme(playScheme);
             SetCursorOff();
             SetIputActionState(true);
+            audioManager.PlayAudio(closeMenuSound);
         }
     }
     public void SetCursorOn()
@@ -92,7 +111,6 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.None;
     }
-
 
     private void Start()
     {
@@ -114,6 +132,20 @@ public class GameManager : MonoBehaviour
                 actionToDisable.Disable();
         }
     }
+
+    void SetPauseOn()
+    {
+        isPaused = true;
+        Time.timeScale = 0f;
+    }
+
+    void SetPauseOff()
+    {
+        isPaused = false;
+        Time.timeScale = 1f;
+        
+    }
+
 }
 
 public enum InputScheme

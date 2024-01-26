@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: risposta3
   m_EditorClassIdentifier: 
   risposte:
-  - risp23
-  - risp13
-  - risp33
-  - risp43
-  pinnyReply: {fileID: 11400000, guid: 45e63f44cd39fac40b583c0c561c0be5, type: 2}
+  - Vai a Fanculo
+  - A Fanculo vai
+  - Me ne vado
+  - Togliti dal cazzo
+  pinnyReplies:
+  - {fileID: 11400000, guid: 45e63f44cd39fac40b583c0c561c0be5, type: 2}

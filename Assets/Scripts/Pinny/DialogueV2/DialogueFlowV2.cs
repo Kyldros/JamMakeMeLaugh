@@ -1,9 +1,10 @@
-using System.IO;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class DialogueFlowV2 : MonoBehaviour
 {
@@ -16,6 +17,10 @@ public class DialogueFlowV2 : MonoBehaviour
     public TextMeshProUGUI option3;
 
     public GameObject replyPanel;
+
+    public List<AudioClip> selectionAudio;
+    public List<AudioClip> pinnyAudio;
+
     private ButtonSelection currentSelection;
 
     private int dialogueIndex = 0;
@@ -36,7 +41,7 @@ public class DialogueFlowV2 : MonoBehaviour
             SelectionUp();
             called = true;
         }
-        
+
         if (context.ReadValue<Vector2>().y < -0.95 && !called)
         {
             SelectionDown();
@@ -52,7 +57,16 @@ public class DialogueFlowV2 : MonoBehaviour
         if (currentSelection != null)
         {
             currentSelection.SelectButton(currentSelection.currentIndex - 1);
+            GameManager.Instance.audioManager.PlayAudio(GetRandomAudio(selectionAudio));
         }
+    }
+
+    private AudioClip GetRandomAudio(List<AudioClip> audioClips)
+    {
+        if(audioClips.Count != 0)
+            return audioClips[Random.Range(0, selectionAudio.Count)];
+        else
+            return null;
     }
 
     public void SelectionDown()
@@ -60,6 +74,7 @@ public class DialogueFlowV2 : MonoBehaviour
         if (currentSelection != null)
         {
             currentSelection.SelectButton(currentSelection.currentIndex + 1);
+            GameManager.Instance.audioManager.PlayAudio(GetRandomAudio(selectionAudio));
         }
     }
 
@@ -76,24 +91,25 @@ public class DialogueFlowV2 : MonoBehaviour
     void SetNewPrhase(FrasiDiPinny frase)
     {
         DisableReply();
-        if(frase != null)
+        if (frase != null)
         {
             currentFrase = frase;
             dialogueIndex = 0;
             SetTextAndImage();
             CheckLastPhrase();
             CheckReply();
+            GetRandomAudio(pinnyAudio);
         }
-        else 
+        else
             Debug.Log("Frase non trovata");
 
-       UnselectAllButton();
+        UnselectAllButton();
     }
 
     private void SetTextAndImage()
     {
-        pinnySpeech.text = currentFrase.frasi[dialogueIndex].frase;
-        if(currentFrase.frasi[dialogueIndex].sprite != null)
+        pinnySpeech.text = currentFrase.frasi[dialogueIndex].GetPrhase();
+        if (currentFrase.frasi[dialogueIndex].sprite != null)
             pinnyimage.sprite = currentFrase.frasi[dialogueIndex].sprite;
     }
 
@@ -161,7 +177,7 @@ public class DialogueFlowV2 : MonoBehaviour
                     EventSystem.current.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
             }
         }
-        
+
     }
 
     public void SelectOption1(InputAction.CallbackContext context)
@@ -172,7 +188,7 @@ public class DialogueFlowV2 : MonoBehaviour
 
     public void ClickOption1()
     {
-        SetNewPrhase(currentFrase.risposta1.pinnyReply);
+        SetNewPrhase(currentFrase.risposta1.PinnyReply);
     }
 
     public void SelectOption2(InputAction.CallbackContext context)
@@ -183,7 +199,7 @@ public class DialogueFlowV2 : MonoBehaviour
 
     public void ClickOption2()
     {
-        SetNewPrhase(currentFrase.risposta2.pinnyReply);
+        SetNewPrhase(currentFrase.risposta2.PinnyReply);
     }
 
     public void SelectOption3(InputAction.CallbackContext context)
@@ -194,7 +210,7 @@ public class DialogueFlowV2 : MonoBehaviour
 
     public void ClickOption3()
     {
-        SetNewPrhase(currentFrase.risposta3.pinnyReply);
+        SetNewPrhase(currentFrase.risposta3.PinnyReply);
     }
 
     private void UnselectAllButton()
