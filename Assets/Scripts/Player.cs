@@ -43,6 +43,10 @@ public class Player : MonoBehaviour
     public AudioClip clipDash;
     public AudioClip tPoseClip;
 
+    [Header("Material")]
+    [SerializeField] private Material mat;
+
+
     [Header("Non toccare chiedi al programmer"), Description("si capito bene, non toccare o ti taglio il bisnelo")]
     public GameObject botMesh;
     public GameObject botParent;
@@ -395,6 +399,7 @@ public class Player : MonoBehaviour
    private void SetImmune()
     {
         canTakeDamage = false;
+        
         StartCoroutine(nameof(immunityDuration));
     }
     public IEnumerator ResetCanTakeDamage()
