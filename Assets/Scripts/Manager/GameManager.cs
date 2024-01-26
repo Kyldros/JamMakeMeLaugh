@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
     public PlayerInput playerInput;
+    public GameObject pinny;
+    public GameObject menu;
+
+    InputScheme playScheme = InputScheme.Menu;
 
     private static GameManager _instance;
     public static GameManager Instance
@@ -27,16 +29,47 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void OpenClippi()
+    public void OpenPinny()
     {
+        if (pinny != null && !pinny.gameObject.activeInHierarchy)
+        {
+            pinny.gameObject.SetActive(true);
+            ChangeInputScheme(InputScheme.PinnyDialogue);
+        }
+    }
 
+    public void ClosePinny()
+    {
+        if (pinny != null && pinny.gameObject.activeInHierarchy)
+        {
+            pinny.gameObject.SetActive(false);
+            ChangeInputScheme(InputScheme.Player);
+        }
     }
 
     public void ChangeInputScheme(InputScheme scheme)
     {
         playerInput.SwitchCurrentActionMap(scheme.ToString());
+        if(scheme != InputScheme.Menu)
+            playScheme = scheme;
     }
-
+    
+    public void OpenCloseMenu()
+    {
+        if(menu != null)
+        {
+            if (menu.gameObject.activeInHierarchy)
+            {
+                menu.gameObject.SetActive(false);
+                ChangeInputScheme(playScheme);
+            }
+            else
+            {
+                menu.gameObject.SetActive(true);
+                ChangeInputScheme(InputScheme.Menu);
+            }   
+        }
+    }
 }
 
 public enum InputScheme
