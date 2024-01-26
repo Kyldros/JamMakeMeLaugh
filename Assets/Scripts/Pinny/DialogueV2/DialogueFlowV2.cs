@@ -16,6 +16,7 @@ public class DialogueFlowV2 : MonoBehaviour
     public TextMeshProUGUI option3;
 
     public GameObject replyPanel;
+    private ButtonSelection currentSelection;
 
     private int dialogueIndex = 0;
     private FrasiDiPinny currentFrase;
@@ -24,6 +25,31 @@ public class DialogueFlowV2 : MonoBehaviour
     private void Start()
     {
         SetNewPrhase(standardPinny);
+        currentSelection = replyPanel.GetComponent<ButtonSelection>();
+    }
+
+    public void Selection(InputAction.CallbackContext context)
+    {
+        if (context.ReadValue<Vector2>().y > 0)
+            SelectionUp();
+        else if (context.ReadValue<Vector2>().y < 0)
+            SelectionDown();
+    }
+
+    public void SelectionUp()
+    {
+        if (currentSelection != null)
+        {
+            currentSelection.SelectButton(currentSelection.currentIndex - 1);
+        }
+    }
+
+    public void SelectionDown()
+    {
+        if (currentSelection != null)
+        {
+            currentSelection.SelectButton(currentSelection.currentIndex + 1);
+        }
     }
 
     public void StartPinnyWithPhrase(FrasiDiPinny startingPhrase)
@@ -113,6 +139,11 @@ public class DialogueFlowV2 : MonoBehaviour
                 EndDialogue();
             else if (!isLastFrase)
                 NextDialogue();
+            else
+            {
+                if (EventSystem.current.currentSelectedGameObject != null)
+                    EventSystem.current.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
+            }
         }
         
     }

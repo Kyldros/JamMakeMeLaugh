@@ -294,11 +294,19 @@ MonoBehaviour:
     m_ActionId: 4376b96d-874f-4ed2-81ef-48e1abfa19ce
     m_ActionName: Player/Look
   - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9e9ba6cd-f232-42df-80dd-749caceb1526
+    m_ActionName: Player/Ragdoll
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6c8d9ebc-f119-42a4-9ee9-c28c46b7d2dd
+    m_ActionName: Player/Dash
+  - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PinnyParle, Assembly-CSharp
-        m_MethodName: GoOn
-        m_Mode: 0
+      - m_Target: {fileID: 1874043849}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OpenMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -307,18 +315,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 9e9ba6cd-f232-42df-80dd-749caceb1526
-    m_ActionName: Player/Ragdoll
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 6c8d9ebc-f119-42a4-9ee9-c28c46b7d2dd
-    m_ActionName: Player/Dash
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: ca8189d5-9025-4f34-8404-f88abfc96bbb
     m_ActionName: Player/Menu
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1874043849}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OpenPinny
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: dec0a516-4526-44f8-8f49-6059a1f55f22
     m_ActionName: Player/Option
   - m_PersistentCalls:
@@ -386,57 +398,97 @@ MonoBehaviour:
     m_ActionId: 67b79c58-88f9-47d9-8d6e-35beafbbe8d6
     m_ActionName: PinnyDialogue/Option3
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1874043849}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OpenMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: bf7e4c36-02fa-453c-90a7-24c07cb7a26a
     m_ActionName: PinnyDialogue/Menu
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: d8d6539f-ad7a-4453-9ab5-14d3a9afc1d7
-    m_ActionName: PinnyDialogue/Option
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 6e5ecaed-999c-428b-874a-cb790414d786
     m_ActionName: Player/Sprint
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8c82f404-41aa-4ad4-b674-fc8dd075c6ee
-    m_ActionName: PinnyDialogue/Look[/Mouse/delta]
-  - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 350489781}
+        m_TargetAssemblyTypeName: DialogueFlowV2, Assembly-CSharp
+        m_MethodName: Selection
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 3c88289e-0b95-4cbe-9408-1073dbd0eade
     m_ActionName: PinnyDialogue/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: f1410312-75cd-48bc-9201-dddfe63ffcf0
-    m_ActionName: Menu/GoOn[/Keyboard/e]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5f97298f-cc20-40b1-abd7-b8069b5bcf0b
-    m_ActionName: Menu/Option1[/Keyboard/1]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ad505c5f-b1f3-4a8b-9399-c60ab6a55827
-    m_ActionName: Menu/Option2[/Keyboard/2]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 9956a9ce-7a5f-41d0-9e00-e38477d66b5e
-    m_ActionName: Menu/Option3[/Keyboard/3]
-  - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1874043849}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: CloseMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 289723b1-f278-4fe0-8832-edd5daefd110
     m_ActionName: Menu/Menu[/Keyboard/escape]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 7875d06a-e46b-40f0-b936-f971322212f1
-    m_ActionName: Menu/Option[/Keyboard/i]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c41bce5f-11b1-4f82-b7b5-6ed5d5761992
-    m_ActionName: Menu/Look[/Mouse/delta]
-  - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1341470528}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: Selection
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 2053fc82-f5e8-48f0-9c8f-7b41a52d1de3
     m_ActionName: Menu/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d9208b29-8f1d-472d-892d-912eacba69fc
+    m_ActionName: Player/TPose[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6147de01-08c6-43a6-baf6-9e04d2860b8c
+    m_ActionName: Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1341470528}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: ClickButton
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: cc5fce5d-d9e8-4d4a-b32e-06b6e578f022
+    m_ActionName: Menu/SelctButton[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PinnyDialogue
@@ -810,6 +862,7 @@ GameObject:
   - component: {fileID: 289954479}
   - component: {fileID: 289954481}
   - component: {fileID: 289954480}
+  - component: {fileID: 289954482}
   m_Layer: 5
   m_Name: ReplyPanel
   m_TagString: Untagged
@@ -877,6 +930,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289954478}
   m_CullTransparentMesh: 1
+--- !u!114 &289954482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289954478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f97fd9feb90bf1343a081ad4472726a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttons:
+  - {fileID: 204039398}
+  - {fileID: 992506729}
+  - {fileID: 1252446808}
 --- !u!1 &305722463
 GameObject:
   m_ObjectHideFlags: 0
@@ -1132,7 +1201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &350489776
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1383,8 +1452,8 @@ RectTransform:
   - {fileID: 1553206877}
   m_Father: {fileID: 892663592}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.15}
-  m_AnchorMax: {x: 0.4, y: 0.45}
+  m_AnchorMin: {x: 0.25, y: 0.35}
+  m_AnchorMax: {x: 0.75, y: 0.6}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1445,21 +1514,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1874043849}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: CloseMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1341470528}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: SetContinue
+        m_MethodName: ExitConfirmation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1654,6 +1711,7 @@ GameObject:
   - component: {fileID: 892663592}
   - component: {fileID: 892663594}
   - component: {fileID: 892663593}
+  - component: {fileID: 892663595}
   m_Layer: 5
   m_Name: ExitConfirmationPanel
   m_TagString: Untagged
@@ -1678,10 +1736,10 @@ RectTransform:
   - {fileID: 1776920148}
   m_Father: {fileID: 1341470527}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.2, y: 0.3}
-  m_AnchorMax: {x: 0.7915561, y: 0.7}
+  m_AnchorMin: {x: 0.2, y: 0.2}
+  m_AnchorMax: {x: 0.8, y: 0.7}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -0.0000076293945, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.7}
 --- !u!114 &892663593
 MonoBehaviour:
@@ -1721,6 +1779,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 892663591}
   m_CullTransparentMesh: 1
+--- !u!114 &892663595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 892663591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f97fd9feb90bf1343a081ad4472726a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttons:
+  - {fileID: 623605399}
+  - {fileID: 1776920147}
 --- !u!1 &984508882
 GameObject:
   m_ObjectHideFlags: 0
@@ -2737,9 +2810,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startText: {fileID: 1543824750}
-  confirmationPanel: {fileID: 0}
-  menuSelection: {fileID: 0}
-  confirmationSelection: {fileID: 0}
+  confirmationPanel: {fileID: 892663591}
+  menuSelection: {fileID: 2015641052}
+  confirmationSelection: {fileID: 892663595}
 --- !u!1 &1457790799
 GameObject:
   m_ObjectHideFlags: 0
@@ -3444,8 +3517,8 @@ RectTransform:
   - {fileID: 1864364576}
   m_Father: {fileID: 892663592}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.6, y: 0.15}
-  m_AnchorMax: {x: 1, y: 0.45}
+  m_AnchorMin: {x: 0.25, y: 0.1}
+  m_AnchorMax: {x: 0.75, y: 0.35}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3566,7 +3639,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1792530528}
   - component: {fileID: 1792530527}
-  - component: {fileID: 1792530526}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -3574,26 +3646,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1792530526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1792530525}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
 --- !u!114 &1792530527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3758,19 +3810,13 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1864364575}
   m_CullTransparentMesh: 1
---- !u!1 &1874043848 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3588403536559940597, guid: 4585279db2173b64fad7aa3912e0b4c3,
-    type: 3}
-  m_PrefabInstance: {fileID: 6120071762946806567}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1874043849 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1512259953205206923, guid: 4585279db2173b64fad7aa3912e0b4c3,
     type: 3}
   m_PrefabInstance: {fileID: 6120071762946806567}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1874043848}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85ebf899dea9aef4386ff981118e0ed8, type: 3}
@@ -4288,6 +4334,7 @@ GameObject:
   - component: {fileID: 2015641049}
   - component: {fileID: 2015641051}
   - component: {fileID: 2015641050}
+  - component: {fileID: 2015641052}
   m_Layer: 5
   m_Name: MenuPanel
   m_TagString: Untagged
@@ -4354,6 +4401,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2015641048}
   m_CullTransparentMesh: 1
+--- !u!114 &2015641052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015641048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f97fd9feb90bf1343a081ad4472726a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttons:
+  - {fileID: 984508882}
+  - {fileID: 2084909513}
 --- !u!1 &2042677892
 GameObject:
   m_ObjectHideFlags: 0
@@ -4585,13 +4647,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1874043848}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1341470528}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: ExitMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

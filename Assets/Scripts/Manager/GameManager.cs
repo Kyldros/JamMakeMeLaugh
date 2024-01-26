@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour
         {
             menu.gameObject.SetActive(true);
             ChangeInputScheme(InputScheme.Menu);
+            SetCursorOn();
         }
 
     }
@@ -70,8 +71,9 @@ public class GameManager : MonoBehaviour
     {
         if (menu != null && menu.gameObject.activeInHierarchy) 
         { 
-                menu.gameObject.SetActive(false);
-                ChangeInputScheme(playScheme);
+            menu.gameObject.SetActive(false);
+            ChangeInputScheme(playScheme);
+            SetCursorOff();
         }
     }
 
@@ -94,6 +96,7 @@ public class GameManager : MonoBehaviour
     {
         if (playerInput != null)
             ChangeInputScheme(InputScheme.Menu);
+        SetCursorOn();
     }
 
 }
