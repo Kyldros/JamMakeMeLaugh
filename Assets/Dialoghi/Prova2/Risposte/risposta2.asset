@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: risposta2
   m_EditorClassIdentifier: 
   risposte:
-  - risp22
-  - risp12
-  - risp32
-  - risp42
-  pinnyReply: {fileID: 11400000, guid: e25f44c2033bd0e4cb462ab92a340d07, type: 2}
+  - Giallo
+  - Arancione
+  - Rosso
+  pinnyReplies:
+  - {fileID: 11400000, guid: e25f44c2033bd0e4cb462ab92a340d07, type: 2}

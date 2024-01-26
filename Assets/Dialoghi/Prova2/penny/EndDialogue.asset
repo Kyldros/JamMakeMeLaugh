@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: EndDialogue
   m_EditorClassIdentifier: 
   frasi:
-  - frase: Fine1
+  - frase:
+    - addio
+    - Idiota
     sprite: {fileID: 0}
-  - frase: FineFinale
+  - frase:
+    - Strunz
+    - Vattene
     sprite: {fileID: 0}
   hasReply: 0
   risposta1: {fileID: 0}

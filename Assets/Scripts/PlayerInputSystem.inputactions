@@ -460,17 +460,6 @@
                 },
                 {
                     "name": "",
-                    "id": "a1fe8a36-d91c-40d2-8ab3-3235a8d2c943",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Option1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "126feb18-584a-45b3-a042-5b0375467deb",
                     "path": "<Keyboard>/1",
                     "interactions": "",
@@ -504,34 +493,12 @@
                 },
                 {
                     "name": "",
-                    "id": "c4bf57a2-b521-4fba-9042-ca4206e7fb95",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Option2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "f1c0ae9d-d880-48c7-8082-08fa1303805f",
                     "path": "<Keyboard>/2",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Option2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "118cc9b7-6b96-48b5-be65-c35efb8d6d48",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Option3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
