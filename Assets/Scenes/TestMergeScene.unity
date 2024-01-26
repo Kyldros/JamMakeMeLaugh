@@ -766,7 +766,9 @@ MonoBehaviour:
   walkSpeed: 10
   ragdollSpeed: 7
   sprintSpeed: 15
-  ragdollTimer: 0
+  ragdollTimerTrap: 0
+  ragdollImmuneDuration: 0
+  ragdollCooldown: 0
   dashMulty: 2
   dashDuration: 1
   dashCooldown: 4
@@ -777,6 +779,7 @@ MonoBehaviour:
   groundCheckDistance: 0.2
   tPoseSpeed: 12
   tPoseDuration: 2
+  tPoseCooldown: 3
   maxHp: 5
   damage: 1
   damageIncreaser: 1
@@ -786,7 +789,11 @@ MonoBehaviour:
   clipRagdoll: {fileID: 0}
   clipDash: {fileID: 0}
   tPoseClip: {fileID: 0}
-  mat: {fileID: 0}
+  mat: {fileID: 2100000, guid: b9a7116c2130f34468bdf8940751e0d6, type: 2}
+  dashColor: {r: 0, g: 0, b: 1, a: 1}
+  ragdollColor: {r: 1, g: 0, b: 0, a: 1}
+  TPoseColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  outlineDuration: 0
   botMesh: {fileID: 1532790331}
   botParent: {fileID: 353737647}
   boneToMove: {fileID: 356500129}
@@ -797,6 +804,8 @@ MonoBehaviour:
   dashUnlocked: 1
   TPoseUnlocked: 1
   isDashing: 0
+  canTPose: 1
+  canRagdoll: 1
   onDamage:
     m_PersistentCalls:
       m_Calls: []
@@ -1836,9 +1845,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5822821947120931875, guid: 08e293842c1451b41959f56bd9671d07,
         type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5822821947120931875, guid: 08e293842c1451b41959f56bd9671d07,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c71ac272f63e64b47b9b1927a69cc6fc, type: 2}
+      objectReference: {fileID: -4565884009001823619, guid: 08e293842c1451b41959f56bd9671d07,
+        type: 3}
+    - target: {fileID: 5822821947120931875, guid: 08e293842c1451b41959f56bd9671d07,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: b9a7116c2130f34468bdf8940751e0d6, type: 2}
     - target: {fileID: 5866666021909216657, guid: 08e293842c1451b41959f56bd9671d07,
         type: 3}
       propertyPath: m_Controller
@@ -3755,6 +3775,11 @@ PrefabInstance:
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 131772113}
+    - target: {fileID: 1512259953205206923, guid: 4585279db2173b64fad7aa3912e0b4c3,
+        type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 2076009643}
     - target: {fileID: 3588403536559940597, guid: 4585279db2173b64fad7aa3912e0b4c3,
         type: 3}
       propertyPath: m_Name
@@ -7659,6 +7684,8 @@ MonoBehaviour:
   option2: {fileID: 1532404051}
   option3: {fileID: 9282311}
   replyPanel: {fileID: 906133903}
+  selectionAudio: []
+  pinnyAudio: []
 --- !u!114 &2061610624
 MonoBehaviour:
   m_ObjectHideFlags: 0
