@@ -26,6 +26,13 @@ public class Player : MonoBehaviour
     public int maxHp = 5;
     public int damage = 1;
 
+    [Header("Audio")]
+    public AudioManager audioManager;
+    public AudioClip[] stepsClips;
+    public AudioClip clipRagdoll;
+    public AudioClip clipDash;
+
+
     
     [Header("Non toccare chiedi al programmer"), Description("si capito bene, non toccare o ti taglio il bisnelo")]
     public GameObject botMesh;
@@ -118,17 +125,16 @@ public class Player : MonoBehaviour
                 isDashing = true;
                 anim.SetBool("isDashing", isDashing);
                 Debug.Log("isDashing " + isDashing);
+                audioManager.PlayAudio(clipDash);
                 
                 StartCoroutine(nameof(startDashCooldown));
                 StartCoroutine(nameof(timerEndDash));
             }
         }
-    }
-
-   
+    }  
     public void Move(InputAction.CallbackContext context)
     {
-        moveDirection = context.ReadValue<Vector2>();
+        moveDirection = new Vector2(context.ReadValue<Vector2>().x, 0);
 
     }
     public void Sprint(InputAction.CallbackContext context)
@@ -198,6 +204,9 @@ public class Player : MonoBehaviour
             {
                 col.enabled = value;
             }
+            audioManager.PlayAudio(clipRagdoll);
+
+           
         }
 
         if (hasTimer || tempBool)
@@ -219,6 +228,21 @@ public class Player : MonoBehaviour
             }
             else
             {
+
+                anim.enabled = false;
+                isRagdoll = true;
+                rb.velocity = Vector3.zero;
+
+                foreach (Rigidbody rb in ragdollRb)
+                {
+                    rb.isKinematic = false;
+                }
+                foreach (Collider col in ragdollColl)
+                {
+                    col.enabled = true;
+                }
+                audioManager.PlayAudio(clipRagdoll);
+
                 canGetUp = false;               
                 StartCoroutine(nameof(timerRagdool));
             }
@@ -254,6 +278,15 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(ragdollTimer);
         canGetUp = true;
         tempBool = true;
+    }
+
+    public void PlayStepClip(AudioClip[] clipList)
+    {
+        int randomInt = UnityEngine.Random.Range(0, clipList.Length-1);
+        AudioClip clipToPlay = clipList[randomInt];
+        audioManager.PlayAudio(clipToPlay);
+
+
     }
 }
 
