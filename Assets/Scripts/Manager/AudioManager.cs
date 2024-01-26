@@ -10,10 +10,14 @@ public class AudioManager : MonoBehaviour
     }
     public void PlayAudio(AudioClip audioClip)
     {
-        GameObject newObject = Instantiate(new GameObject());
-        AudioSource source = newObject.AddComponent<AudioSource>();
-        source.clip = audioClip;
-        source.Play();
+        if (audioClip != null)
+        {
+            GameObject newObject = Instantiate(new GameObject());
+            AudioSource source = newObject.AddComponent<AudioSource>();
+            source.clip = audioClip;
+            source.Play();
+            Destroy(newObject, source.clip.length);
+        }
     }
     public void PlayMusic(AudioClip audioClip)
     {
