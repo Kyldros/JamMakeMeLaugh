@@ -22,6 +22,13 @@ public class Player : MonoBehaviour
     [SerializeField] private float dashDuration;
     [SerializeField] private float dashCooldown;
 
+    [Header("Jump")]
+    [SerializeField] private float jumpForce;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float groundCheckDistance = 0.2f;
+
+    private bool isGrounded;
+
     [Header("Damage System")]
     public int maxHp = 5;
     public int damage = 1;
@@ -32,8 +39,6 @@ public class Player : MonoBehaviour
     public AudioClip clipRagdoll;
     public AudioClip clipDash;
 
-
-    
     [Header("Non toccare chiedi al programmer"), Description("si capito bene, non toccare o ti taglio il bisnelo")]
     public GameObject botMesh;
     public GameObject botParent;
@@ -41,6 +46,9 @@ public class Player : MonoBehaviour
     public Rigidbody rb;
     public Collider coll;
     public int currentHP = 5;
+    public bool ragdollUnlocked;
+    public bool dashUnlocked;
+    public bool TPoseUnlocked;
 
 
     private float WalkSpeed => isDashing ? walkSpeed * dashMulty : walkSpeed;
@@ -51,6 +59,7 @@ public class Player : MonoBehaviour
     private Vector2 moveDirection;
     private Vector3 lastMovement;
     private bool isRagdoll = false;
+    private bool isTpose = false;
     private bool isMoving;
     private bool canGetUp;
     private bool isDashing = false;
@@ -88,13 +97,13 @@ public class Player : MonoBehaviour
             {
                 boneToMove.GetComponent<Rigidbody>().MovePosition(transform.position);
             }
+
         }
         else
         {
             //dash
             Move2(lastMovement);
         }
-
     }
     public void OnEnable()
     {
@@ -108,16 +117,15 @@ public class Player : MonoBehaviour
     }
     public void Ragdoll(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && ragdollUnlocked)
         {
-            
-            SetRagdoll(!isRagdoll,false);
+            SetRagdoll(!isRagdoll, false);
         }
 
     }
     public void Dash(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && dashUnlocked)
         {
             if (!isDashing && canDash)
             {
@@ -126,12 +134,36 @@ public class Player : MonoBehaviour
                 anim.SetBool("isDashing", isDashing);
                 Debug.Log("isDashing " + isDashing);
                 audioManager.PlayAudio(clipDash);
-                
+
                 StartCoroutine(nameof(startDashCooldown));
                 StartCoroutine(nameof(timerEndDash));
             }
         }
-    }  
+    }
+    public void Jump(InputAction.CallbackContext context)
+    {
+        if (context.performed && Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer))
+        {
+            // Add force in the upward direction to simulate jumping
+            Debug.Log("Isjumping");
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
+
+    }
+    public void TPose(InputAction.CallbackContext context)
+    {
+        if (context.performed && TPoseUnlocked)
+        {
+            SetTPose(!isTpose);
+        }
+    }
+
+    private void SetTPose(bool value)
+    {
+        isTpose = value;
+        rb.useGravity = !value;
+    }
+
     public void Move(InputAction.CallbackContext context)
     {
         moveDirection = new Vector2(context.ReadValue<Vector2>().x, 0);
@@ -153,7 +185,7 @@ public class Player : MonoBehaviour
     public void Move2(Vector2 moveDirection)
     {
         botMesh.transform.localPosition = Vector3.zero;
-        botMesh.transform.localRotation = new Quaternion(0,0,0,0);
+        botMesh.transform.localRotation = new Quaternion(0, 0, 0, 0);
 
         Vector3 movement = new Vector3(moveDirection.x, 0, moveDirection.y);
 
@@ -188,9 +220,9 @@ public class Player : MonoBehaviour
         anim.SetBool("isMoving", isMoving);
 
     }
-    public void SetRagdoll(bool value,bool hasTimer)
+    public void SetRagdoll(bool value, bool hasTimer)
     {
-        if (!hasTimer && !tempBool) 
+        if (!hasTimer && !tempBool)
         {
             anim.enabled = !value;
             isRagdoll = value;
@@ -206,7 +238,7 @@ public class Player : MonoBehaviour
             }
             audioManager.PlayAudio(clipRagdoll);
 
-           
+
         }
 
         if (hasTimer || tempBool)
@@ -243,10 +275,10 @@ public class Player : MonoBehaviour
                 }
                 audioManager.PlayAudio(clipRagdoll);
 
-                canGetUp = false;               
+                canGetUp = false;
                 StartCoroutine(nameof(timerRagdool));
             }
-            
+
         }
     }
     public void takeDamage(int damage)
@@ -274,7 +306,7 @@ public class Player : MonoBehaviour
     }
     public IEnumerator timerRagdool()
     {
-       
+
         yield return new WaitForSeconds(ragdollTimer);
         canGetUp = true;
         tempBool = true;
@@ -282,11 +314,25 @@ public class Player : MonoBehaviour
 
     public void PlayStepClip(AudioClip[] clipList)
     {
-        int randomInt = UnityEngine.Random.Range(0, clipList.Length-1);
+        int randomInt = UnityEngine.Random.Range(0, clipList.Length - 1);
         AudioClip clipToPlay = clipList[randomInt];
         audioManager.PlayAudio(clipToPlay);
 
 
     }
+
+    public void UnlockRagdoll()
+    {
+        ragdollUnlocked = true;
+    }
+    public void UnlockDash()
+    {
+        dashUnlocked = true;
+    }
+    public void UnlockTPose()
+    {
+        TPoseUnlocked = true;
+    }
+
 }
 
