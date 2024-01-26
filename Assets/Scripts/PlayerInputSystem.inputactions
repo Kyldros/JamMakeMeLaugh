@@ -300,7 +300,7 @@
                 {
                     "name": "",
                     "id": "00d8b680-271a-4ce3-9dfc-1613b38c204b",
-                    "path": "<Keyboard>/i",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -333,7 +333,7 @@
                 {
                     "name": "",
                     "id": "291eb6d4-3341-44aa-8a75-fbf8f333f9c7",
-                    "path": "<Keyboard>/t",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
