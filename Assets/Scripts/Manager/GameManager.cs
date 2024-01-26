@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject pinny;
     public GameObject menu;
 
-    public List<GameObject> wallist = new();
+    public List<TriggerWall> wallList = new();
 
     InputScheme playScheme = InputScheme.Player;
 
@@ -32,6 +32,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void TriggerWalls(bool value)
+    {
+        foreach (TriggerWall wall in wallList) 
+        { 
+            wall.gameObject.GetComponent<Collider>().enabled = value;
+        }
+    }
     public void OpenPinny()
     {
         if (pinny != null && !pinny.gameObject.activeInHierarchy)
@@ -40,7 +47,6 @@ public class GameManager : MonoBehaviour
             ChangeInputScheme(InputScheme.PinnyDialogue);
         }
     }
-
     public void ClosePinny()
     {
         if (pinny != null && pinny.gameObject.activeInHierarchy)
@@ -49,14 +55,12 @@ public class GameManager : MonoBehaviour
             ChangeInputScheme(InputScheme.Player);
         }
     }
-
     public void ChangeInputScheme(InputScheme scheme)
     {
         playerInput.SwitchCurrentActionMap(scheme.ToString());
         if (scheme != InputScheme.Menu)
             playScheme = scheme;
     }
-
     public void OpenMenu()
     {
         if (menu != null && !menu.gameObject.activeInHierarchy)
@@ -74,15 +78,11 @@ public class GameManager : MonoBehaviour
                 ChangeInputScheme(playScheme);
         }
     }
-
-    
-
     public void SetCursorOn()
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
     }
-
     public void SetCursorOff()
     {
         Cursor.visible = false;

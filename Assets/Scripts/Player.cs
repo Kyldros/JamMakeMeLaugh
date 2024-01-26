@@ -30,11 +30,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float tPoseSpeed;
     [SerializeField] private float tPoseDuration;
 
-
-
     [Header("Damage System")]
     public int maxHp = 5;
     public int damage = 1;
+    public int damageIncreaser = 1;
+    public float immunityDuration;
 
     [Header("Audio")]
     public AudioManager audioManager;
@@ -53,8 +53,9 @@ public class Player : MonoBehaviour
     public bool ragdollUnlocked;
     public bool dashUnlocked;
     public bool TPoseUnlocked;
+    public bool isDashing = false;
 
-
+    private bool canTakeDamage;
     private bool isGrounded;
     private List<Rigidbody> ragdollRb;
     private List<Collider> ragdollColl;
@@ -64,7 +65,7 @@ public class Player : MonoBehaviour
     private bool isTPose = false;
     private bool isMoving;
     private bool canGetUp;
-    private bool isDashing = false;
+   
     private bool canDash = true;
     private Animator anim;
     private bool isSprinting;
@@ -87,9 +88,6 @@ public class Player : MonoBehaviour
         {
             col.enabled = false;
         }
-        
-
-
     }
     private void Update()
     {
@@ -140,6 +138,7 @@ public class Player : MonoBehaviour
             {
                 canDash = false;
                 isDashing = true;
+                GameManager.Instance.TriggerWalls(!isDashing);
                 anim.SetTrigger("isDashing");
                 Debug.Log("isDashing " + isDashing);
                 audioManager.PlayAudio(clipDash);
@@ -176,14 +175,12 @@ public class Player : MonoBehaviour
             }
         }
     }
-
     private void SetTPose(bool value)
     {
         canDash = !value;
         isTPose = value;
         rb.useGravity = !value;
     }
-
     public void Move(InputAction.CallbackContext context)
     {
         moveDirection = new Vector2(context.ReadValue<Vector2>().x, 0);
@@ -328,11 +325,16 @@ public class Player : MonoBehaviour
     }
     public void takeDamage(int damage)
     {
-        currentHP -= damage;
-        if (currentHP <= 0)
-            onDeath?.Invoke();
-        else
-            onDamage?.Invoke();
+        if (canTakeDamage)
+        {
+            currentHP -= damage;
+            if (currentHP <= 0)
+                onDeath?.Invoke();
+            else
+                onDamage?.Invoke();
+
+            SetImmune();
+        }
 
     }
     public IEnumerator startDashCooldown()
@@ -345,6 +347,7 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(dashDuration);
         isDashing = false;
+        GameManager.Instance.TriggerWalls(!isDashing);
         rb.velocity = Vector3.zero;
         anim.SetTrigger("isExitingDashing");
         Debug.Log("isDashing " + isDashing);
@@ -385,6 +388,21 @@ public class Player : MonoBehaviour
     {
         TPoseUnlocked = true;
     }
+    public void IncreaseDamage()
+    {
+        damage += damageIncreaser;
+    }
+   private void SetImmune()
+    {
+        canTakeDamage = false;
+        StartCoroutine(nameof(immunityDuration));
+    }
+    public IEnumerator ResetCanTakeDamage()
+    {
+        yield return new WaitForSeconds(immunityDuration);
+        canTakeDamage=true;
+    }
+
 
 }
 

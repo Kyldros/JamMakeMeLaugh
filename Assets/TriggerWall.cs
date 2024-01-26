@@ -11,7 +11,7 @@ public class TriggerWall : MonoBehaviour
     }
     private void Start()
     {
-        //gameManager.wallList.Add(this.gameObject);
+        gameManager.wallList.Add(this);
     }
 
 }
