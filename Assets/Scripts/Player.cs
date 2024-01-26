@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +15,7 @@ public class Player : MonoBehaviour
 
     [Header("Ragdoll")]
     [SerializeField] private float ragdollTimer;
-
+    
     [Header("Dash")]
     [SerializeField] private float dashMulty;
     [SerializeField] private float dashDuration;
@@ -27,17 +26,22 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float groundCheckDistance = 0.2f;
 
-    private bool isGrounded;
+    [Header("TPose")]
+    [SerializeField] private float tPoseSpeed;
+    [SerializeField] private float tPoseDuration;
 
     [Header("Damage System")]
     public int maxHp = 5;
     public int damage = 1;
+    public int damageIncreaser = 1;
+    public float immunityDuration;
 
     [Header("Audio")]
     public AudioManager audioManager;
     public AudioClip[] stepsClips;
     public AudioClip clipRagdoll;
     public AudioClip clipDash;
+    public AudioClip tPoseClip;
 
     [Header("Non toccare chiedi al programmer"), Description("si capito bene, non toccare o ti taglio il bisnelo")]
     public GameObject botMesh;
@@ -49,20 +53,19 @@ public class Player : MonoBehaviour
     public bool ragdollUnlocked;
     public bool dashUnlocked;
     public bool TPoseUnlocked;
+    public bool isDashing = false;
 
-
-    private float WalkSpeed => isDashing ? walkSpeed * dashMulty : walkSpeed;
-    private float RagdollSpeed => isDashing ? ragdollSpeed * dashMulty : ragdollSpeed;
-
+    private bool canTakeDamage;
+    private bool isGrounded;
     private List<Rigidbody> ragdollRb;
     private List<Collider> ragdollColl;
     private Vector2 moveDirection;
     private Vector3 lastMovement;
     private bool isRagdoll = false;
-    private bool isTpose = false;
+    private bool isTPose = false;
     private bool isMoving;
     private bool canGetUp;
-    private bool isDashing = false;
+   
     private bool canDash = true;
     private Animator anim;
     private bool isSprinting;
@@ -85,24 +88,27 @@ public class Player : MonoBehaviour
         {
             col.enabled = false;
         }
-
-
     }
     private void Update()
     {
-        if (!isDashing)
+        if (!isDashing && !isTPose)
         {
             Move2(moveDirection);
             if (isRagdoll)
             {
                 boneToMove.GetComponent<Rigidbody>().MovePosition(transform.position);
             }
-
         }
-        else
+        else if (isDashing)
         {
             rb.velocity = Vector3.zero;
             //dash
+            Move2(lastMovement);
+
+        }
+        else if (isTPose)
+        {
+            rb.velocity = Vector3.zero;
             Move2(lastMovement);
         }
     }
@@ -132,7 +138,8 @@ public class Player : MonoBehaviour
             {
                 canDash = false;
                 isDashing = true;
-                anim.SetBool("isDashing", isDashing);
+                GameManager.Instance.TriggerWalls(!isDashing);
+                anim.SetTrigger("isDashing");
                 Debug.Log("isDashing " + isDashing);
                 audioManager.PlayAudio(clipDash);
 
@@ -153,18 +160,27 @@ public class Player : MonoBehaviour
     }
     public void TPose(InputAction.CallbackContext context)
     {
-        if (context.performed && TPoseUnlocked)
+        if (context.performed && dashUnlocked)
         {
-            SetTPose(!isTpose);
+            if (!isDashing && !isTPose)
+            {
+                canDash = false;
+                isTPose = true;
+                anim.SetTrigger("isTPose");
+                Debug.Log("isTPose " + isTPose);
+                audioManager.PlayAudio(tPoseClip);
+
+
+                StartCoroutine(nameof(timerEndTPose));
+            }
         }
     }
-
     private void SetTPose(bool value)
     {
-        isTpose = value;
+        canDash = !value;
+        isTPose = value;
         rb.useGravity = !value;
     }
-
     public void Move(InputAction.CallbackContext context)
     {
         moveDirection = new Vector2(context.ReadValue<Vector2>().x, 0);
@@ -190,23 +206,45 @@ public class Player : MonoBehaviour
 
         Vector3 movement = new Vector3(moveDirection.x, 0, moveDirection.y);
 
-        if (isRagdoll && !isSprinting && !isDashing)
+        if (isRagdoll && !isSprinting && !isDashing && !isTPose)
         {
-            rb.velocity = new Vector3(moveDirection.x * RagdollSpeed, rb.velocity.y, moveDirection.y * RagdollSpeed);
+            rb.velocity = new Vector3(moveDirection.x * ragdollSpeed, rb.velocity.y, moveDirection.y * ragdollSpeed);
         }
-        else
-        {
-            rb.velocity = new Vector3(moveDirection.x * WalkSpeed, rb.velocity.y, moveDirection.y * WalkSpeed);
 
-            if (isSprinting)
+        else if (!isRagdoll && !isSprinting && !isTPose)
+        {
+            if (isDashing)
+            {
+                rb.velocity = new Vector3(moveDirection.x * walkSpeed * dashMulty, rb.velocity.y, moveDirection.y * walkSpeed * dashMulty);
+            }
+            else
+            {
+                rb.velocity = new Vector3(moveDirection.x * walkSpeed, rb.velocity.y, moveDirection.y * walkSpeed);
+            }
+
+        }
+        else if (isSprinting && !isTPose)
+        {
+            if (isDashing)
+            {
+                rb.velocity = new Vector3(moveDirection.x * sprintSpeed * dashMulty, rb.velocity.y, moveDirection.y * sprintSpeed * dashMulty);
+            }
+            else
+            {
                 rb.velocity = new Vector3(moveDirection.x * sprintSpeed, rb.velocity.y, moveDirection.y * sprintSpeed);
+            }
 
         }
-
-        if (lastMovement != movement && !isRagdoll)
+        else if (isTPose)
         {
-            lastMovement = movement;
-
+            rb.velocity = new Vector3(moveDirection.x * tPoseSpeed, 0, moveDirection.y * tPoseSpeed);
+        }
+        if (lastMovement != movement && !isRagdoll && !isTPose)
+        {
+            if (movement != Vector3.zero)
+            {
+                lastMovement = movement;
+            }
             if (movement == Vector3.right)
             {
                 botParent.transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
@@ -216,7 +254,10 @@ public class Player : MonoBehaviour
                 botParent.transform.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
             }
         }
-
+        else if (isTPose)
+        {
+            botParent.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+        }
         isMoving = rb.velocity.magnitude > 0.2f;
         anim.SetBool("isMoving", isMoving);
 
@@ -284,11 +325,16 @@ public class Player : MonoBehaviour
     }
     public void takeDamage(int damage)
     {
-        currentHP -= damage;
-        if (currentHP <= 0)
-            onDeath?.Invoke();
-        else
-            onDamage?.Invoke();
+        if (canTakeDamage)
+        {
+            currentHP -= damage;
+            if (currentHP <= 0)
+                onDeath?.Invoke();
+            else
+                onDamage?.Invoke();
+
+            SetImmune();
+        }
 
     }
     public IEnumerator startDashCooldown()
@@ -299,11 +345,21 @@ public class Player : MonoBehaviour
     }
     public IEnumerator timerEndDash()
     {
-        yield return new WaitForSeconds(dashDuration); ;
+        yield return new WaitForSeconds(dashDuration);
         isDashing = false;
+        GameManager.Instance.TriggerWalls(!isDashing);
         rb.velocity = Vector3.zero;
-        anim.SetBool("isDashing", isDashing);
+        anim.SetTrigger("isExitingDashing");
         Debug.Log("isDashing " + isDashing);
+    }
+    public IEnumerator timerEndTPose()
+    {
+        yield return new WaitForSeconds(tPoseDuration);
+        isTPose = false;
+        canDash = true;
+        rb.velocity = Vector3.zero;
+        anim.SetTrigger("isExitingTPose");
+        Debug.Log("isTPose " + isTPose);
     }
     public IEnumerator timerRagdool()
     {
@@ -312,7 +368,6 @@ public class Player : MonoBehaviour
         canGetUp = true;
         tempBool = true;
     }
-
     public void PlayStepClip(AudioClip[] clipList)
     {
         int randomInt = UnityEngine.Random.Range(0, clipList.Length - 1);
@@ -321,7 +376,6 @@ public class Player : MonoBehaviour
 
 
     }
-
     public void UnlockRagdoll()
     {
         ragdollUnlocked = true;
@@ -334,6 +388,21 @@ public class Player : MonoBehaviour
     {
         TPoseUnlocked = true;
     }
+    public void IncreaseDamage()
+    {
+        damage += damageIncreaser;
+    }
+   private void SetImmune()
+    {
+        canTakeDamage = false;
+        StartCoroutine(nameof(immunityDuration));
+    }
+    public IEnumerator ResetCanTakeDamage()
+    {
+        yield return new WaitForSeconds(immunityDuration);
+        canTakeDamage=true;
+    }
+
 
 }
 
