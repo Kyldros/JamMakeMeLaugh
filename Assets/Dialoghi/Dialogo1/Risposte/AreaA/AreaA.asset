@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4687d289cedefb14f8ef807d913d2630, type: 3}
-  m_Name: TutorialAnswer_B
+  m_Name: AreaA
   m_EditorClassIdentifier: 
   risposte:
-  - Stop being annoying and get me there!
+  - Where do I have to go?
   pinnyReplies:
-  - {fileID: 11400000, guid: ce9365020db3c304aa3d5cd8d86855bf, type: 2}
+  - {fileID: 11400000, guid: 18ab0df377934b545bb78550de699236, type: 2}

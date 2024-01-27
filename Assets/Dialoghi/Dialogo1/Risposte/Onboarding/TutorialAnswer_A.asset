@@ -15,4 +15,4 @@ MonoBehaviour:
   risposte:
   - Let's go!
   pinnyReplies:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: ce9365020db3c304aa3d5cd8d86855bf, type: 2}

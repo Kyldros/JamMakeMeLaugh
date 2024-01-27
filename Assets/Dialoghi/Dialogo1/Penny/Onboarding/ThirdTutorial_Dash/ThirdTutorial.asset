@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb04a4861429be438e018c8b09c9d56, type: 3}
+  m_Name: ThirdTutorial
+  m_EditorClassIdentifier: 
+  frasi:
+  - frase:
+    - Hey there, GUB, my glitch-hunting partner in crime!
+    sprite: {fileID: 0}
+  - frase:
+    - Ready to add a dash of chaos to your digital escapades?
+    sprite: {fileID: 0}
+  - frase:
+    - It's time to unleash the power of the dash mechanic,
+    sprite: {fileID: 0}
+  - frase:
+    - where collisions become suggestions
+    sprite: {fileID: 0}
+  - frase:
+    - And walls are mere suggestions! Here's the scoop
+    sprite: {fileID: 0}
+  - frase:
+    - ' Pressing F activates the Dash, letting you pass through certain walls like
+      a glitchy ninja!'
+    sprite: {fileID: 0}
+  hasReply: 0
+  risposta1: {fileID: 11400000, guid: 1779713269c0761488b945ec55986eb6, type: 2}
+  risposta2: {fileID: 11400000, guid: d8b14474a38580d4391757d14b54d068, type: 2}
+  risposta3: {fileID: 11400000, guid: 767224df8e749944fa040916a6f1ff1d, type: 2}

@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2bb04a4861429be438e018c8b09c9d56, type: 3}
-  m_Name: endtutorial
+  m_Name: EndPhraseAreaA
   m_EditorClassIdentifier: 
   frasi:
   - frase:
-    - Please go Easy on me GUB!
+    - ' I''ll have my virtual antennas tuned to the weird and wonky. If there''s
+      a bug party happening, you bet I''ll crash it and drag you along for the ride!'
     sprite: {fileID: 0}
   hasReply: 0
   risposta1: {fileID: 0}

@@ -9,10 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4687d289cedefb14f8ef807d913d2630, type: 3}
-  m_Name: TutorialAnswer_B
+  m_Script: {fileID: 11500000, guid: 2bb04a4861429be438e018c8b09c9d56, type: 3}
+  m_Name: AreaARandopAnswer
   m_EditorClassIdentifier: 
-  risposte:
-  - Stop being annoying and get me there!
-  pinnyReplies:
-  - {fileID: 11400000, guid: ce9365020db3c304aa3d5cd8d86855bf, type: 2}
+  frasi:
+  - frase:
+    - Please go Easy on me GUB!
+    sprite: {fileID: 0}
+  hasReply: 0
+  risposta1: {fileID: 0}
+  risposta2: {fileID: 0}
+  risposta3: {fileID: 0}
