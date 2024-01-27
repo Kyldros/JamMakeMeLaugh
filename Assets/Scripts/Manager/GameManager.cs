@@ -146,6 +146,15 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         
     }
+    
+    public void DisablePlayerInput()
+    {
+        playerInput.SwitchCurrentActionMap(InputScheme.Disable.ToString());
+    }
+    public void EnablePlayerInput()
+    {
+        playerInput.SwitchCurrentActionMap(InputScheme.Player.ToString());
+    }
 
 }
 
@@ -153,6 +162,7 @@ public enum InputScheme
 {
     Player,
     PinnyDialogue,
-    Menu
+    Menu,
+    Disable
 }
 
