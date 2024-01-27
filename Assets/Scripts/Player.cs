@@ -135,22 +135,6 @@ public class Player : MonoBehaviour
             rb.velocity = Vector3.zero;
             Move2(lastMovement);
         }
-        if (lastMovement != movement && !isRagdoll && !isTPose)
-        {
-            if (movement != Vector3.zero)
-            {
-                lastMovement = movement;
-            }
-            if (movement == Vector3.right)
-            {
-                botParent.transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
-            }
-            else if (movement == Vector3.left)
-            {
-                botParent.transform.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
-            }
-
-        }
         if (transform.position.z != -10)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, -10);
