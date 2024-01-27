@@ -31,7 +31,6 @@ public class DialogueFlowV2 : MonoBehaviour
     private void Start()
     {
         currentSelection = replyPanel.GetComponent<ButtonSelection>();
-        SetNewPrhase(standardPinny);
     }
 
     public void Selection(InputAction.CallbackContext context)
@@ -98,10 +97,11 @@ public class DialogueFlowV2 : MonoBehaviour
             SetTextAndImage();
             CheckLastPhrase();
             CheckReply();
-            
         }
         else
-            Debug.Log("Frase non trovata");
+        {
+            EndDialogue();
+        }
 
         UnselectAllButton();
     }

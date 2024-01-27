@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
     public PlayerInput playerInput;
+    public Player player;
+
     public GameObject pinny;
     public GameObject menu;
     public bool isPaused { get; private set; } = false;
@@ -118,6 +120,7 @@ public class GameManager : MonoBehaviour
             ChangeInputScheme(InputScheme.Menu);
         SetCursorOn();
         SetIputActionState(false);
+        pinny.gameObject.SetActive(false);
     }
 
     private void SetIputActionState(bool active)
@@ -145,6 +148,15 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         
     }
+    
+    public void DisablePlayerInput()
+    {
+        playerInput.SwitchCurrentActionMap(InputScheme.Disable.ToString());
+    }
+    public void EnablePlayerInput()
+    {
+        playerInput.SwitchCurrentActionMap(InputScheme.Player.ToString());
+    }
 
 }
 
@@ -152,6 +164,7 @@ public enum InputScheme
 {
     Player,
     PinnyDialogue,
-    Menu
+    Menu,
+    Disable
 }
 
