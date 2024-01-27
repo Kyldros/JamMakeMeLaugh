@@ -16,13 +16,15 @@ public class AudioManager : MonoBehaviour
             AudioSource source = newObject.AddComponent<AudioSource>();
             source.clip = audioClip;
             source.Play();
-            Destroy(newObject, source.clip.length);
+            Destroy(newObject.gameObject, source.clip.length);
         }
     }
     public void PlayMusic(AudioClip audioClip)
     {
         audioSource.Stop();
         audioSource.clip = audioClip;
+        audioSource.volume = 0.5f;
+        
         audioSource.Play();
     }
     public void StopAudio(AudioSource audioSource)

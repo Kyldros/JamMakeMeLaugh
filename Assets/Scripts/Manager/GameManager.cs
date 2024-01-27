@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public AudioClip closeMenuSound;
     public AudioClip openPinnySound;
     public AudioClip closePinnySound;
+    public AudioClip bossFightMusic;
 
     public List<TriggerWall> wallList = new();
 

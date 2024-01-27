@@ -10,7 +10,15 @@ public class Boss : MonoBehaviour
     [SerializeField] private BossArm leftArm;
     [SerializeField] private BossArm rightArm;
     [SerializeField] private float attackFollowDuration;
-   
+    [SerializeField] private GameObject dancePoint;
+
+    
+    public AudioClip[] attacksClips;
+    public AudioClip[] normalVoiceClip;
+    public AudioClip[] attackVoiceClip;
+
+
+
 
     private Vector3 playerPos;
 
@@ -25,6 +33,9 @@ public class Boss : MonoBehaviour
     private bool raiseArm;
     private bool moveArm;
     private bool currentAttackisRight = false;
+    private bool canAttack = true;
+   public bool alive;
+    
     private void Awake()
     {
         currentHp = hpMax;
@@ -39,9 +50,14 @@ public class Boss : MonoBehaviour
     {
         currentHp -= damage;
         Debug.Log(currentHp);
-        if (currentHp <= 0)
+        if (currentHp <= 0 && alive)
         {
             anim.SetTrigger("Death");
+            canAttack = false;
+            alive = false;
+            
+            GameManager.Instance.player.WinGame(dancePoint);
+            
  
         }
     }
@@ -49,54 +65,58 @@ public class Boss : MonoBehaviour
 
     public void Update()
     {
-        if (leftArm.isAttacking)
-        {          
-            if (timerFollow >= attackFollowDuration)
-            {
-                if (moveArm)
-                {
-                    MoveArm(leftArm);
-                }
-                else if(raiseArm)
-                {
-                    RaiseArm(leftArm);
-                }
-                else
-                {
-                    DropArm(leftArm);
-                }               
-            }
-            else
-            {
-                ArmAttack(leftArm);
-                timerFollow += Time.deltaTime;
-            }
-        }
-
-        else if (rightArm.isAttacking)
+        if (canAttack)
         {
-            if (timerFollow >= attackFollowDuration)
+            if (leftArm.isAttacking)
             {
-                if (moveArm)
+                if (timerFollow >= attackFollowDuration)
                 {
-                    MoveArm(rightArm);
-                }
-                else if (raiseArm)
-                {
-                    RaiseArm(rightArm);
+                    if (moveArm)
+                    {
+                        MoveArm(leftArm);
+                    }
+                    else if (raiseArm)
+                    {
+                        RaiseArm(leftArm);
+                    }
+                    else
+                    {
+                        DropArm(leftArm);
+                    }
                 }
                 else
                 {
-                    DropArm(rightArm);
+                    ArmAttack(leftArm);
+                    timerFollow += Time.deltaTime;
                 }
-
             }
-            else
+
+            else if (rightArm.isAttacking)
             {
-                ArmAttack(rightArm);
-                timerFollow += Time.deltaTime;
+                if (timerFollow >= attackFollowDuration)
+                {
+                    if (moveArm)
+                    {
+                        MoveArm(rightArm);
+                    }
+                    else if (raiseArm)
+                    {
+                        RaiseArm(rightArm);
+                    }
+                    else
+                    {
+                        DropArm(rightArm);
+                    }
+
+                }
+                else
+                {
+                    ArmAttack(rightArm);
+                    timerFollow += Time.deltaTime;
+                }
             }
         }
+       
     }
 
     private void ArmAttack(BossArm arm)
@@ -107,7 +127,6 @@ public class Boss : MonoBehaviour
         playerPos = GameManager.Instance.player.transform.position;
         arm.transform.position = Vector3.Lerp(arm.transform.position, new Vector3(playerPos.x, arm.pivot.transform.position.y, playerPos.z), timerAttack);        
     }
-
     private void DropArm(BossArm arm)
     {
         arm.coll.isTrigger = true;
@@ -147,7 +166,6 @@ public class Boss : MonoBehaviour
             StartOtherHandAttack();
         }
     }
-
     public void StartOtherHandAttack()
     {
         if (currentAttackisRight)
@@ -171,7 +189,6 @@ public class Boss : MonoBehaviour
         
 
     }
-
     public void LeftAttack()
     {
         rightArm.isAttacking = false;
@@ -203,6 +220,27 @@ public class Boss : MonoBehaviour
         rightArm.isAttacking = true;
         anim.enabled = false;
     }
-
+    public void PlayBossMusic()
+    {
+        GameManager.Instance.audioManager.PlayMusic(GameManager.Instance.bossFightMusic);
+    }
+    public void PlayAttacksClip()
+    {
+        int randomInt = UnityEngine.Random.Range(0, attacksClips.Length);
+        AudioClip clipToPlay = attacksClips[randomInt];
+        GameManager.Instance.audioManager.PlayAudio(clipToPlay);
+    }
+    public void PlayVoiceClip()
+    {
+        int randomInt = UnityEngine.Random.Range(0, normalVoiceClip.Length);
+        AudioClip clipToPlay = normalVoiceClip[randomInt];
+        GameManager.Instance.audioManager.PlayAudio(clipToPlay);
+    }
+    public void PlayAttackVoiceClip()
+    {
+        int randomInt = UnityEngine.Random.Range(0, attackVoiceClip.Length);
+        AudioClip clipToPlay = attackVoiceClip[randomInt];
+        GameManager.Instance.audioManager.PlayAudio(clipToPlay);
+    }
 
 }

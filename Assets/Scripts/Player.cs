@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using static UnityEngine.Rendering.DebugUI;
 
 public class Player : MonoBehaviour
 {
@@ -86,6 +87,7 @@ public class Player : MonoBehaviour
     private bool isTPose = false;
     private bool isMoving;
     private bool canGetUp;
+    private GameObject TposeAudioClipObject;
 
     private Vector3 tPoseStartAngle;
     Vector3 movement;
@@ -200,14 +202,14 @@ public class Player : MonoBehaviour
                 canDash = false;
                 canTPose = false;
                 isTPose = true;
-                anim.SetTrigger("isTPose");
-                audioManager.PlayAudio(tPoseClip);
+                anim.SetTrigger("isTPose");               
                 SetOutlineColor(TPoseColor);
 
                 if (tPoseHeals)
                 {
                     HealPlayer(tPoseHeals);
                 }
+
                 StartCoroutine(nameof(startTPoseCooldown));
                 StartCoroutine(nameof(timerEndTPose));
             }
@@ -216,12 +218,6 @@ public class Player : MonoBehaviour
     private void HealPlayer(bool tPoseHeals)
     {
         throw new System.NotImplementedException();
-    }
-    private void SetTPose(bool value)
-    {
-        canDash = !value;
-        isTPose = value;
-        rb.useGravity = !value;
     }
     public void Move(InputAction.CallbackContext context)
     {
@@ -371,9 +367,12 @@ public class Player : MonoBehaviour
     }
     public IEnumerator startTPoseCooldown()
     {
+
+       
         yield return new WaitForSeconds(tPoseCooldown);
         canTPose = true;
         Debug.Log("Tpose Ready");
+
     }
     public IEnumerator startRagdollCooldown()
     {
@@ -394,16 +393,27 @@ public class Player : MonoBehaviour
     }
     public IEnumerator timerEndTPose()
     {
+        TposeAudioClipObject = Instantiate(new GameObject());
+        TposeAudioClipObject.name = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+        AudioSource source = TposeAudioClipObject.AddComponent<AudioSource>();
+        source.clip = tPoseClip;
+        source.Play();
+
         yield return new WaitForSeconds(tPoseDuration);
+
         isTPose = false;
         canDash = true;
         rb.velocity = Vector3.zero;
         TurnOffOutline();
-        audioManager.StopAudio(audioManager.GetComponent<AudioSource>());
+
+        TposeAudioClipObject.GetComponent<AudioSource>().mute = true;
+        TposeAudioClipObject.GetComponent<AudioSource>().Stop();
+        TposeAudioClipObject.SetActive(false);
+        Destroy(TposeAudioClipObject.gameObject);
+
         anim.SetTrigger("isExitingTPose");
 
         botParent.transform.rotation = Quaternion.Euler(tPoseStartAngle);
-
 
     }
     public void PlayStepClip()
@@ -504,10 +514,14 @@ public class Player : MonoBehaviour
         currentPlatform = platformerEffector3D;
     }
 
-    public void EndGame()
+    public void WinGame(GameObject dancePoint)
     {
         GameManager.Instance.DisablePlayerInput();
+        transform.position = dancePoint.transform.position;
+        anim.applyRootMotion = true;
+        rb.velocity = Vector3.zero;
         anim.SetTrigger("BossDead");
+        GameManager.Instance.audioManager.PlayMusic(GameManager.Instance.bossFightMusic);
     }
    
 }
