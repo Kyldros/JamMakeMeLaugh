@@ -2915,6 +2915,11 @@ PrefabInstance:
       objectReference: {fileID: 2061610621}
     - target: {fileID: 1512259953205206923, guid: 4585279db2173b64fad7aa3912e0b4c3,
         type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 131772114}
+    - target: {fileID: 1512259953205206923, guid: 4585279db2173b64fad7aa3912e0b4c3,
+        type: 3}
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 131772113}
@@ -3120,7 +3125,7 @@ MonoBehaviour:
   attackFollowPlayerTimer: 0
   DelayAttacks: 0
   leftArm: {fileID: 2060246253}
-  RightArm: {fileID: 0}
+  RightArm: {fileID: 1595985383}
 --- !u!95 &825313496
 Animator:
   serializedVersion: 5
@@ -5745,6 +5750,7 @@ GameObject:
   - component: {fileID: 1595985385}
   - component: {fileID: 1595985384}
   - component: {fileID: 1595985383}
+  - component: {fileID: 1595985387}
   m_Layer: 0
   m_Name: RightArm
   m_TagString: Untagged
@@ -5781,6 +5787,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boss: {fileID: 825313495}
   armDamage: 0
+  armSpeed: 0
+  coll: {fileID: 0}
+  rb: {fileID: 0}
   isAttacking: 0
 --- !u!65 &1595985384
 BoxCollider:
@@ -5853,6 +5862,33 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1595985381}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &1595985387
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595985381}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1666945487
 GameObject:
   m_ObjectHideFlags: 0
@@ -7436,6 +7472,7 @@ GameObject:
   - component: {fileID: 2060246255}
   - component: {fileID: 2060246254}
   - component: {fileID: 2060246253}
+  - component: {fileID: 2060246257}
   m_Layer: 0
   m_Name: LeftArm
   m_TagString: Untagged
@@ -7472,6 +7509,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boss: {fileID: 825313495}
   armDamage: 0
+  armSpeed: 2
+  coll: {fileID: 0}
+  rb: {fileID: 0}
   isAttacking: 0
 --- !u!65 &2060246254
 BoxCollider:
@@ -7544,6 +7584,33 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2060246251}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &2060246257
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060246251}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &2061610621
 GameObject:
   m_ObjectHideFlags: 0

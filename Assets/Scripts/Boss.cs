@@ -22,6 +22,7 @@ public class Boss : MonoBehaviour
     private void Start()
     {
         anim.SetTrigger("Intro");
+        anim.SetTrigger("StartLeftAttack");
     }
     public void TakeDamage(int damage)
     {
@@ -48,9 +49,11 @@ public class Boss : MonoBehaviour
     }
     public void LeftAttack()
     {
+        //Usare lerp , e moveTo
         leftArm.coll.isTrigger = true;
         playerPos = GameManager.Instance.player.transform.position;
-        leftArm.transform.position = new Vector3(playerPos.x, leftArm.transform.position.y, playerPos.z);
+        Vector3 direction = new Vector3(playerPos.x - transform.position.x, leftArm.transform.position.y, playerPos.z - transform.position.z);
+        leftArm.rb.velocity = direction * leftArm.armSpeed;
         
     }
     public void StartRightAttack()
