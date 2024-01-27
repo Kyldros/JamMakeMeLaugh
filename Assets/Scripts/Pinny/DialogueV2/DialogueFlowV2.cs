@@ -99,7 +99,9 @@ public class DialogueFlowV2 : MonoBehaviour
             CheckReply();
         }
         else
-            Debug.Log("Frase non trovata");
+        {
+            EndDialogue();
+        }
 
         UnselectAllButton();
     }

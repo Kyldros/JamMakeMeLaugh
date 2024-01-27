@@ -15,6 +15,8 @@ public class LaunchPlayer : MonoBehaviour
     Animator anim;
     public AnimatorController degree45Cont;
     public AnimatorController degree90Cont;
+    public AnimatorController degree45Loop;
+    public AnimatorController degree90loop;
     public GameObject shotAnimationObject;
     public GameObject visual;
     bool isDisabled = false;
@@ -24,10 +26,16 @@ public class LaunchPlayer : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        if(is45Degree)
+        if (is45Degree)
+        {
+            GetComponentInChildren<Animator>().runtimeAnimatorController = degree45Loop;
             anim.runtimeAnimatorController = degree45Cont;
+        }
         else
+        {
+            GetComponentInChildren<Animator>().runtimeAnimatorController = degree90loop;
             anim.runtimeAnimatorController = degree90Cont;
+        }
     }
 
     private void Update()
