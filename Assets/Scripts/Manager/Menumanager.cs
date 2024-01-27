@@ -10,6 +10,7 @@ public class MenuManager : MonoBehaviour
     public Image startImageReference;
     public Sprite startSprite;
     public Sprite continueSprite;
+    public Sprite restartSprite;
 
     public GameObject confirmationPanel;
 
@@ -17,6 +18,10 @@ public class MenuManager : MonoBehaviour
     public ButtonSelection confirmationSelection;
     public List<AudioClip> selectionMenu;
     private ButtonSelection currentSelection;
+
+    public Image titleImage;
+    public Sprite loseSprite;
+    public Sprite winSprite;
 
     private void Start()
     {
@@ -74,6 +79,23 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    public void SetRestart()
+    {
+        if (startImageReference != null)
+        {
+            startImageReference.sprite = restartSprite;
+        }
+    }
+
+    public void SetWinImage()
+    {
+        titleImage.sprite = winSprite;
+    }
+    public void SetLoseImage()
+    {
+        titleImage.sprite = loseSprite;
+    }
+
     public void ExitMenu()
     {
         confirmationPanel.SetActive(true);
@@ -98,4 +120,17 @@ public class MenuManager : MonoBehaviour
         else
             return null;
     }
+
+    public void WinGame()
+    {
+        SetRestart();
+        SetWinImage();
+    }
+
+    public void LoseGame()
+    {
+        SetRestart();
+        SetLoseImage();
+    }
+
 }
