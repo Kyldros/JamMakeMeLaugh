@@ -19,6 +19,9 @@ public class Boss : MonoBehaviour
 
     private float timerAttack;
     private float timerFollow;
+    private float timer1;
+    private float timer2;
+    private float timer3;
     private void Awake()
     {
         currentHp = hpMax;
@@ -46,8 +49,7 @@ public class Boss : MonoBehaviour
     public void Update()
     {
         if (leftArm.isAttacking)
-        {
-            
+        {          
             if (timerFollow >= attackFollowDuration)
             {
                 DropArm(leftArm);
@@ -58,6 +60,7 @@ public class Boss : MonoBehaviour
                 timerFollow += Time.deltaTime;
             }
         }
+
         else if (RightArm.isAttacking)
         {
 
@@ -76,13 +79,31 @@ public class Boss : MonoBehaviour
     private void DropArm(BossArm arm)
     {
         arm.coll.isTrigger = true;
-        timerAttack += arm.armDropSpeed * Time.deltaTime;
-        timerAttack = Mathf.Clamp01(timerAttack);
-        playerPos = GameManager.Instance.player.transform.position;
-        arm.transform.position = Vector3.Lerp(arm.transform.position, new Vector3(arm.transform.position.x, arm.dropReachHeight.transform.position.y, playerPos.z), timerAttack);
+        timer1 += arm.armDropSpeed * Time.deltaTime;
+        timer1 = Mathf.Clamp01(timer1);
+        arm.transform.position = Vector3.Lerp(arm.transform.position, new Vector3(arm.transform.position.x, arm.dropReachHeight.transform.position.y,arm.transform.position.z), timer1);
+
         if (Vector3.Distance(arm.transform.position, new Vector3(arm.transform.position.x, arm.dropReachHeight.transform.position.y, playerPos.z)) <= 0.2)
-        {
-            arm.isAttacking = false;
+        {                     
+            timer2 += arm.armDropSpeed * Time.deltaTime;
+            timer2 = Mathf.Clamp01(timer2);
+            arm.transform.position = Vector3.Lerp(arm.transform.position, new Vector3(arm.transform.position.x, arm.startPoint.transform.position.y, arm.transform.position.z), timer2);
+
+            if (Vector3.Distance(arm.transform.position, new Vector3(arm.transform.position.x, arm.startPoint.transform.position.y, arm.transform.position.z)) <= 0.2)
+            {
+                arm.coll.isTrigger = true;
+                timer3 += arm.armDropSpeed * Time.deltaTime;
+                timer3 = Mathf.Clamp01(timer3);
+                playerPos = GameManager.Instance.player.transform.position;
+                arm.transform.position = Vector3.Lerp(arm.transform.position,arm.startPoint.transform.position, timer3);
+
+                if (Vector3.Distance(arm.transform.position, arm.startPoint.transform.position) <= 0.2)
+                {
+                    anim.SetTrigger("EndLeftAttack");
+                    arm.isAttacking = false;
+
+                }
+            }
         }
         
     }
