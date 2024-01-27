@@ -10,17 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2bb04a4861429be438e018c8b09c9d56, type: 3}
-  m_Name: Pinny_FirstTUtorial
+  m_Name: endtutorial
   m_EditorClassIdentifier: 
   frasi:
   - frase:
-    - Ciao, vai a fare in culo
+    - hhh
     sprite: {fileID: 0}
-  - frase: []
-    sprite: {fileID: 0}
-  - frase: []
-    sprite: {fileID: 0}
-  hasReply: 1
+  hasReply: 0
   risposta1: {fileID: 0}
   risposta2: {fileID: 0}
   risposta3: {fileID: 0}

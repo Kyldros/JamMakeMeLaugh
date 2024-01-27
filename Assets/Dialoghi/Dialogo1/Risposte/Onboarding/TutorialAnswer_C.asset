@@ -10,11 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4687d289cedefb14f8ef807d913d2630, type: 3}
-  m_Name: Risposta
+  m_Name: TutorialAnswer_C
   m_EditorClassIdentifier: 
   risposte:
-  - risp1
-  - risp2
-  - risp3
+  - Aw shit here we go again...
   pinnyReplies:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: ce9365020db3c304aa3d5cd8d86855bf, type: 2}
