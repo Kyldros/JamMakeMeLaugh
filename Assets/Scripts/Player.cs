@@ -495,6 +495,10 @@ public class Player : MonoBehaviour
     {
         healOnTPose += healOnTPoseUpgrade;
     }
+    public void StopDash()
+    {
+
+    }
 
 }
 
