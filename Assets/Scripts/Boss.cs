@@ -10,10 +10,14 @@ public class Boss : MonoBehaviour
     [SerializeField] public float DelayAttacks;
     [SerializeField] private BossArm leftArm;
     [SerializeField] private BossArm RightArm;
+
+    private float journeyLength;
+    private float startTime;
     private Vector3 playerPos;
     
     private int currentHp;
     private Animator anim;
+    private bool starting;
     private void Awake()
     {
         currentHp = hpMax;
@@ -22,6 +26,7 @@ public class Boss : MonoBehaviour
     private void Start()
     {
         anim.SetTrigger("Intro");
+        anim.SetTrigger("StartLeftAttack");
     }
     public void TakeDamage(int damage)
     {
@@ -36,9 +41,30 @@ public class Boss : MonoBehaviour
         }
     }
 
+    // Calculate the fraction of the journey completed
+    
     public void Update() 
     {
+        if(leftArm.isAttacking)
+        {
+            if(!starting)
+            {
+                startTime = Time.deltaTime;
+                starting = true;
+            }
+            
+            journeyLength = Vector3.Distance(transform.position, new Vector3(playerPos.x, leftArm.transform.position.y, playerPos.z));
+            float distCovered = (Time.time - startTime) * leftArm.armSpeed;
 
+            playerPos = GameManager.Instance.transform.position;
+            float fracJourney = distCovered / journeyLength;
+
+            leftArm.transform.position = Vector3.Lerp(transform.position, new Vector3(playerPos.x, leftArm.transform.position.y, playerPos.z), fracJourney);
+        }
+        else if(RightArm.isAttacking)
+        {
+
+        }
     }
 
     public void StartLeftAttack()
@@ -48,9 +74,8 @@ public class Boss : MonoBehaviour
     }
     public void LeftAttack()
     {
-        leftArm.coll.isTrigger = true;
-        playerPos = GameManager.Instance.player.transform.position;
-        leftArm.transform.position = new Vector3(playerPos.x, leftArm.transform.position.y, playerPos.z);
+        //Usare lerp , e moveTo
+       
         
     }
     public void StartRightAttack()

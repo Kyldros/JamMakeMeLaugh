@@ -8,13 +8,16 @@ public class BossArm : MonoBehaviour
 {
     public Boss boss;
     public int armDamage;
+    public float armSpeed;
 
     [Header("non toccare")]
     public Collider coll;
+    public Rigidbody rb;
     public bool isAttacking;
     private void OnEnable()
     {
         coll = GetComponent<Collider>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void OnCollisionEnter(Collision collision)
