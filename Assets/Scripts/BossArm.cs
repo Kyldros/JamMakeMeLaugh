@@ -19,6 +19,7 @@ public class BossArm : MonoBehaviour
     public GameObject startPoint;
     public GameObject pivot;
     public bool isRight;
+    public AudioClip clipTestata;
     private void OnEnable()
     {
         coll = GetComponent<Collider>();
@@ -31,6 +32,7 @@ public class BossArm : MonoBehaviour
         {
             if (player.isDashing && !isAttacking)
             {
+                GameManager.Instance.audioManager.PlayAudio(clipTestata);
                 boss.TakeDamage(player.damage);
             }
         }
