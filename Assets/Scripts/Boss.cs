@@ -42,9 +42,7 @@ public class Boss : MonoBehaviour
         if (currentHp <= 0)
         {
             anim.SetTrigger("Death");
-            Debug.Log("yeeeee boss morto");
-
-
+ 
         }
     }
 
