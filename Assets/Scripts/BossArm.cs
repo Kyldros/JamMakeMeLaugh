@@ -39,7 +39,7 @@ public class BossArm : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.TryGetComponent<Player>(out Player player))
-        {
+        {         
             if (isAttacking)
             {
                 player.takeDamage(armDamage);

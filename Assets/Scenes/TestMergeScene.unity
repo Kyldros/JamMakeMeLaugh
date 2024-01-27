@@ -4952,6 +4952,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3462048392743748451, guid: b370177f4b70edf458ee23f623c5646e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3908531
+      objectReference: {fileID: 0}
+    - target: {fileID: 7751323219545402006, guid: b370177f4b70edf458ee23f623c5646e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 8892773584077650142, guid: b370177f4b70edf458ee23f623c5646e,
         type: 3}
       propertyPath: m_Name
@@ -5082,6 +5092,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5824513861890120038, guid: 7d4e45f248f4bff4e89f4059a6e5589b,
         type: 3}
+      propertyPath: maxHp
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824513861890120038, guid: 7d4e45f248f4bff4e89f4059a6e5589b,
+        type: 3}
       propertyPath: dashColor.b
       value: 0
       objectReference: {fileID: 0}
@@ -5115,6 +5130,21 @@ PrefabInstance:
       propertyPath: audioManager
       value: 
       objectReference: {fileID: 2076009643}
+    - target: {fileID: 5824513861890120038, guid: 7d4e45f248f4bff4e89f4059a6e5589b,
+        type: 3}
+      propertyPath: canTakeDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824513861890120038, guid: 7d4e45f248f4bff4e89f4059a6e5589b,
+        type: 3}
+      propertyPath: healOnTPoseUpgrade
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824513861890120038, guid: 7d4e45f248f4bff4e89f4059a6e5589b,
+        type: 3}
+      propertyPath: ragdollImmuneDuration
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5824513861890120038, guid: 7d4e45f248f4bff4e89f4059a6e5589b,
         type: 3}
       propertyPath: onDamage.m_PersistentCalls.m_Calls.Array.size
@@ -5184,6 +5214,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8432542894905665717, guid: 7d4e45f248f4bff4e89f4059a6e5589b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 8432542894905665717, guid: 7d4e45f248f4bff4e89f4059a6e5589b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -20.66
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
