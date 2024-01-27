@@ -11,8 +11,8 @@ public class PinnyDialogueTrigger : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Player>())
         {
-            GameManager.Instance.pinny.GetComponent<DialogueFlowV2>().StartPinnyWithPhrase(dialogueToStart);
             GameManager.Instance.OpenPinny();
+            GameManager.Instance.pinny.GetComponent<DialogueFlowV2>().StartPinnyWithPhrase(dialogueToStart);
             if (oneTimeOnly)
             {
                 gameObject.SetActive(false);
