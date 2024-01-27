@@ -22,6 +22,7 @@ public class AudioManager : MonoBehaviour
     public void PlayMusic(AudioClip audioClip)
     {
         audioSource.Stop();
+        audioSource.playOnAwake = false;
         audioSource.clip = audioClip;
         audioSource.volume = 0.5f;
         
