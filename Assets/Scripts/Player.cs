@@ -99,7 +99,7 @@ public class Player : MonoBehaviour
     public UnityEvent onDamage = new UnityEvent();
     public UnityEvent onDeath = new UnityEvent();
 
-
+    private PlatformerEffector3D currentPlatform;
 
     private void Start()
     {
@@ -224,7 +224,8 @@ public class Player : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         moveDirection = new Vector2(context.ReadValue<Vector2>().x, 0);
-
+        if (currentPlatform != null && context.ReadValue<Vector2>().y < 0)
+            currentPlatform.DisableCollider();
     }
     public void Sprint(InputAction.CallbackContext context)
     {
@@ -500,5 +501,17 @@ public class Player : MonoBehaviour
 
     }
 
+    internal void UnregisterPlatform(PlatformerEffector3D platformerEffector3D)
+    {
+        if(currentPlatform != null && currentPlatform == platformerEffector3D)
+        {
+            currentPlatform = null;
+        }
+    }
+
+    internal void RegisterPlatform(PlatformerEffector3D platformerEffector3D)
+    {
+        currentPlatform = platformerEffector3D;
+    }
 }
 
