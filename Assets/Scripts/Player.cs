@@ -496,6 +496,10 @@ public class Player : MonoBehaviour
     {
         healOnTPose += healOnTPoseUpgrade;
     }
+    public void StopDash()
+    {
+
+    }
 
     internal void UnregisterPlatform(PlatformerEffector3D platformerEffector3D)
     {
