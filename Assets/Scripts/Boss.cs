@@ -8,7 +8,7 @@ public class Boss : MonoBehaviour
     [SerializeField] float attackFollowPlayerTimer;
     [SerializeField] public float DelayAttacks;
     [SerializeField] private BossArm leftArm;
-    [SerializeField] private BossArm RightArm;
+    [SerializeField] private BossArm rightArm;
     [SerializeField] private float attackFollowDuration;
    
 
@@ -22,6 +22,9 @@ public class Boss : MonoBehaviour
     private float timer1;
     private float timer2;
     private float timer3;
+    private bool raiseArm;
+    private bool moveArm;
+    private bool currentAttackisRight = false;
     private void Awake()
     {
         currentHp = hpMax;
@@ -29,8 +32,8 @@ public class Boss : MonoBehaviour
     }
     private void Start()
     {
-        anim.SetTrigger("Intro");
-        anim.SetTrigger("StartLeftAttack");
+        anim.SetTrigger("Intro");       
+        StartLeftAttack();
     }
     public void TakeDamage(int damage)
     {
@@ -52,7 +55,18 @@ public class Boss : MonoBehaviour
         {          
             if (timerFollow >= attackFollowDuration)
             {
-                DropArm(leftArm);
+                if (moveArm)
+                {
+                    MoveArm(leftArm);
+                }
+                else if(raiseArm)
+                {
+                    RaiseArm(leftArm);
+                }
+                else
+                {
+                    DropArm(leftArm);
+                }               
             }
             else
             {
@@ -61,9 +75,29 @@ public class Boss : MonoBehaviour
             }
         }
 
-        else if (RightArm.isAttacking)
+        else if (rightArm.isAttacking)
         {
+            if (timerFollow >= attackFollowDuration)
+            {
+                if (moveArm)
+                {
+                    MoveArm(rightArm);
+                }
+                else if (raiseArm)
+                {
+                    RaiseArm(rightArm);
+                }
+                else
+                {
+                    DropArm(rightArm);
+                }
 
+            }
+            else
+            {
+                ArmAttack(rightArm);
+                timerFollow += Time.deltaTime;
+            }
         }
     }
 
@@ -73,7 +107,8 @@ public class Boss : MonoBehaviour
         timerAttack += arm.armMoveSpeed * Time.deltaTime;
         timerAttack = Mathf.Clamp01(timerAttack);
         playerPos = GameManager.Instance.player.transform.position;
-        arm.transform.position = Vector3.Lerp(arm.transform.position, new Vector3(playerPos.x, arm.transform.position.y, playerPos.z), timerAttack);
+        arm.pivot.transform.position = Vector3.Lerp(arm.pivot.transform.position, new Vector3(playerPos.x, arm.pivot.transform.position.y, playerPos.z), timerAttack);
+        
     }
 
     private void DropArm(BossArm arm)
@@ -81,44 +116,98 @@ public class Boss : MonoBehaviour
         arm.coll.isTrigger = true;
         timer1 += arm.armDropSpeed * Time.deltaTime;
         timer1 = Mathf.Clamp01(timer1);
-        arm.transform.position = Vector3.Lerp(arm.transform.position, new Vector3(arm.transform.position.x, arm.dropReachHeight.transform.position.y,arm.transform.position.z), timer1);
+        arm.pivot.transform.position = Vector3.Lerp(arm.pivot.transform.position, new Vector3(arm.pivot.transform.position.x, arm.dropReachHeight.transform.position.y,arm.pivot.transform.position.z), timer1);
 
-        if (Vector3.Distance(arm.transform.position, new Vector3(arm.transform.position.x, arm.dropReachHeight.transform.position.y, playerPos.z)) <= 0.2)
-        {                     
-            timer2 += arm.armDropSpeed * Time.deltaTime;
-            timer2 = Mathf.Clamp01(timer2);
-            arm.transform.position = Vector3.Lerp(arm.transform.position, new Vector3(arm.transform.position.x, arm.startPoint.transform.position.y, arm.transform.position.z), timer2);
-
-            if (Vector3.Distance(arm.transform.position, new Vector3(arm.transform.position.x, arm.startPoint.transform.position.y, arm.transform.position.z)) <= 0.2)
-            {
-                arm.coll.isTrigger = true;
-                timer3 += arm.armDropSpeed * Time.deltaTime;
-                timer3 = Mathf.Clamp01(timer3);
-                playerPos = GameManager.Instance.player.transform.position;
-                arm.transform.position = Vector3.Lerp(arm.transform.position,arm.startPoint.transform.position, timer3);
-
-                if (Vector3.Distance(arm.transform.position, arm.startPoint.transform.position) <= 0.2)
-                {
-                    anim.SetTrigger("EndLeftAttack");
-                    arm.isAttacking = false;
-
-                }
-            }
+        if (Vector3.Distance(arm.pivot.transform.position, new Vector3(arm.pivot.transform.position.x, arm.dropReachHeight.transform.position.y, arm.pivot.transform.position.z)) <= 0.2)
+        {
+            raiseArm = true;
         }
-        
+
     }
+
+    private void RaiseArm(BossArm arm)
+    {
+        timer2 += arm.armDropSpeed * Time.deltaTime;
+        timer2 = Mathf.Clamp01(timer2);
+        arm.pivot.transform.position = Vector3.Lerp(arm.pivot.transform.position, new Vector3(arm.pivot.transform.position.x, arm.startPoint.transform.position.y, arm.pivot.transform.position.z), timer2);
+
+        if (Vector3.Distance(arm.pivot.transform.position, new Vector3(arm.pivot.transform.position.x, arm.startPoint.transform.position.y, arm.pivot.transform.position.z)) <= 0.2)
+        {
+           moveArm = true;
+        }
+    }
+
+    private void MoveArm(BossArm arm)
+    {
+        arm.coll.isTrigger = true;
+        timer3 += arm.armDropSpeed * Time.deltaTime;
+        timer3 = Mathf.Clamp01(timer3);
+        playerPos = GameManager.Instance.player.transform.position;
+        arm.pivot.transform.position = Vector3.Lerp(arm.pivot.transform.position, arm.startPoint.transform.position, timer3);
+
+        if (Vector3.Distance(arm.pivot.transform.position, arm.startPoint.transform.position) <= 0.2)
+        {
+            anim.enabled = false;
+            arm.isAttacking = false;            
+            SetArmEndAnimation(arm.isRight);
+            StartOtherHandAttack();
+        }
+    }
+
+    public void StartOtherHandAttack()
+    {
+        if (currentAttackisRight)
+        {
+            StartLeftAttack();
+            currentAttackisRight = false;
+        }
+        else
+        {
+            StartRightAttack();
+            currentAttackisRight=true;
+        }
+
+        timerFollow = 0;
+        timer1 = 0;
+        timer2 = 0;
+        timer3 = 0;
+        moveArm = false;
+        raiseArm = false;
+        
+
+    }
+
+
     public void LeftAttack()
     {
+        rightArm.isAttacking = false;
         leftArm.isAttacking = true;
+        anim.enabled = false;
     }
     public void StartRightAttack()
-    {
-        RightArm.isAttacking = true;
+    {       
         anim.SetTrigger("StartRightAttack");
+    }
+    public void StartLeftAttack()
+    {
+        anim.SetTrigger("StartLeftAttack");
+    }
+    public void SetArmEndAnimation(bool isRight)
+    {
+        if(isRight)
+        {
+            anim.SetTrigger("EndRightAttack");
+        }
+        else
+        {
+            anim.SetTrigger("EndLeftAttack");
+        }
     }
     public void RightAttack()
     {
-
+        leftArm.isAttacking=false;
+        rightArm.isAttacking = true;
+        anim.enabled = false;
     }
 
 
