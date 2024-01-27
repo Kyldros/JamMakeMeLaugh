@@ -50,7 +50,7 @@ public class LaunchPlayer : MonoBehaviour
         startTime = Time.time;
         isDisabled = true;
         player.isDashing = false;
-        player.SetRagdoll(true,true);
+        player.SetRagdoll(true);
     }
 
     public void ShootObject()
@@ -66,13 +66,15 @@ public class LaunchPlayer : MonoBehaviour
             
         } 
 
-        player.rb.AddForce( direction * force, ForceMode.Impulse);
+        player.rb.AddForce(direction * force, ForceMode.Impulse);
         visual.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        player = other.GetComponent<Player>();
+        if(other.GetComponent<Player>())
+            player = other.GetComponent<Player>();
+
         if (player != null)
         {
             if (is45Degree)

@@ -310,7 +310,7 @@ public class Player : MonoBehaviour
         isRagdoll = value;
 
         
-        rb.velocity = Vector3.zero;
+        //rb.velocity = Vector3.zero;
 
         foreach (Rigidbody rb in ragdollRb)
         {

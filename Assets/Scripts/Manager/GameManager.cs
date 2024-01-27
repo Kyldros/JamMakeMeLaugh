@@ -119,6 +119,7 @@ public class GameManager : MonoBehaviour
             ChangeInputScheme(InputScheme.Menu);
         SetCursorOn();
         SetIputActionState(false);
+        pinny.gameObject.SetActive(false);
     }
 
     private void SetIputActionState(bool active)
