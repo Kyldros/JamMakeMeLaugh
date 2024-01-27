@@ -71,6 +71,7 @@ public class Player : MonoBehaviour
     public bool isDashing = false;
     public bool canTPose;
     public bool canRagdoll;
+    public bool isShooted;
     private bool canDash = true;
 
     private bool tPoseHeals;
@@ -116,7 +117,9 @@ public class Player : MonoBehaviour
     {
         if (!isDashing && !isTPose)
         {
-            Move2(moveDirection);
+            if(!isShooted)
+                Move2(moveDirection);
+
             if (isRagdoll)
             {
                 boneToMove.GetComponent<Rigidbody>().MovePosition(transform.position);

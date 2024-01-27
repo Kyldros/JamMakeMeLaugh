@@ -17,6 +17,7 @@ public class LaunchPlayer : MonoBehaviour
     public AnimatorController degree90Cont;
     public AnimatorController degree45Loop;
     public AnimatorController degree90loop;
+    public Animator loopAnimator;
     public GameObject shotAnimationObject;
     public GameObject visual;
     bool isDisabled = false;
@@ -28,12 +29,12 @@ public class LaunchPlayer : MonoBehaviour
         anim = GetComponent<Animator>();
         if (is45Degree)
         {
-            GetComponentInChildren<Animator>().runtimeAnimatorController = degree45Loop;
+            loopAnimator.runtimeAnimatorController = degree45Loop;
             anim.runtimeAnimatorController = degree45Cont;
         }
         else
         {
-            GetComponentInChildren<Animator>().runtimeAnimatorController = degree90loop;
+            loopAnimator.runtimeAnimatorController = degree90loop;
             anim.runtimeAnimatorController = degree90Cont;
         }
     }
@@ -46,6 +47,7 @@ public class LaunchPlayer : MonoBehaviour
             {
                 GameManager.Instance.EnablePlayerInput();
                 isDisabled = false;
+                player.isShooted = false;
             }
         }
     }
@@ -59,6 +61,7 @@ public class LaunchPlayer : MonoBehaviour
         isDisabled = true;
         player.isDashing = false;
         player.SetRagdoll(true);
+        player.isShooted = true;
     }
 
     public void ShootObject()
