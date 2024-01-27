@@ -8,15 +8,10 @@ public class BossArm : MonoBehaviour
 {
     public Boss boss;
     public int armDamage;
-
-    [Header("non toccare")]
-    public Collider coll;
-    public bool isAttacking;
-    private void OnEnable()
-    {
-        coll = GetComponent<Collider>();
-    }
-
+    public float attackCooldown;
+    private bool isAttacking;
+    private float timer;
+    
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.TryGetComponent<Player>(out Player player))
@@ -38,5 +33,22 @@ public class BossArm : MonoBehaviour
             }
         }
     }
-    
+    private void Update()
+    {
+        if(timer >= attackCooldown)
+        {
+            StartAttack();
+            timer = 0;
+        }
+        else
+        {
+            timer += Time.deltaTime;
+        }
+    }
+
+    private void StartAttack()
+    {
+       isAttacking = true;
+
+    }
 }
