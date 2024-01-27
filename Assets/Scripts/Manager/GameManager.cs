@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class GameManager : MonoBehaviour
     public AudioClip closePinnySound;
 
     public List<TriggerWall> wallList = new();
+
+    private bool gameEnded=false;
 
     InputScheme playScheme = InputScheme.Player;
 
@@ -94,7 +97,7 @@ public class GameManager : MonoBehaviour
     }
     public void CloseMenu()
     {
-        if (menu != null && menu.gameObject.activeInHierarchy) 
+        if (menu != null && menu.gameObject.activeInHierarchy && !gameEnded) 
         { 
             menu.gameObject.SetActive(false);
             ChangeInputScheme(playScheme);
@@ -156,6 +159,31 @@ public class GameManager : MonoBehaviour
     public void EnablePlayerInput()
     {
         playerInput.SwitchCurrentActionMap(InputScheme.Player.ToString());
+    }
+
+    public void WinGame()
+    {
+        OpenMenu();
+        menu.GetComponent<MenuManager>().WinGame();
+        gameEnded = true;
+    }
+
+    public void LoseGame()
+    {
+        OpenMenu();
+        menu.GetComponent<MenuManager>().LoseGame();
+        gameEnded = true;
+    }
+
+
+    public void RestartGame()
+    {
+        if (gameEnded)
+        {
+            string currentSceneName = SceneManager.GetActiveScene().name;
+
+            SceneManager.LoadScene(currentSceneName);
+        }
     }
 
 }

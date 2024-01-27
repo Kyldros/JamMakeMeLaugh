@@ -3234,10 +3234,14 @@ MonoBehaviour:
   startImageReference: {fileID: 58484471}
   startSprite: {fileID: 21300000, guid: 619d08a34f630a54f9882508366b8799, type: 3}
   continueSprite: {fileID: 21300000, guid: cc024772a3ce7284a83248fc03edf26d, type: 3}
+  restartSprite: {fileID: 0}
   confirmationPanel: {fileID: 949488151}
   menuSelection: {fileID: 1755933756}
   confirmationSelection: {fileID: 949488152}
   selectionMenu: []
+  titleImage: {fileID: 0}
+  loseSprite: {fileID: 0}
+  winSprite: {fileID: 0}
 --- !u!114 &1200683378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4833,6 +4837,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1200683377}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: SetContinue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 803941930}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
