@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,6 +12,7 @@ public class MenuManager : MonoBehaviour
 
     public ButtonSelection menuSelection;
     public ButtonSelection confirmationSelection;
+    public List<AudioClip> selectionMenu;
     private ButtonSelection currentSelection;
 
     private void Start()
@@ -33,6 +35,8 @@ public class MenuManager : MonoBehaviour
             SelectionUp();
         else if(context.ReadValue<Vector2>().y < 0)
             SelectionDown();
+
+        GameManager.Instance.audioManager.PlayAudio(GetRandomAudio(selectionMenu));
     }
 
     public void SelectionUp()
@@ -84,4 +88,11 @@ public class MenuManager : MonoBehaviour
         Application.Quit();
     }
 
+    private AudioClip GetRandomAudio(List<AudioClip> audioClips)
+    {
+        if (audioClips.Count != 0)
+            return audioClips[Random.Range(0, audioClips.Count)];
+        else
+            return null;
+    }
 }

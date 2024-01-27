@@ -64,7 +64,7 @@ public class DialogueFlowV2 : MonoBehaviour
     private AudioClip GetRandomAudio(List<AudioClip> audioClips)
     {
         if(audioClips.Count != 0)
-            return audioClips[Random.Range(0, selectionAudio.Count)];
+            return audioClips[Random.Range(0, audioClips.Count)];
         else
             return null;
     }
@@ -98,7 +98,7 @@ public class DialogueFlowV2 : MonoBehaviour
             SetTextAndImage();
             CheckLastPhrase();
             CheckReply();
-            GetRandomAudio(pinnyAudio);
+            
         }
         else
             Debug.Log("Frase non trovata");
@@ -111,6 +111,7 @@ public class DialogueFlowV2 : MonoBehaviour
         pinnySpeech.text = currentFrase.frasi[dialogueIndex].GetPrhase();
         if (currentFrase.frasi[dialogueIndex].sprite != null)
             pinnyimage.sprite = currentFrase.frasi[dialogueIndex].sprite;
+        GameManager.Instance.audioManager.PlayAudio(GetRandomAudio(pinnyAudio));
     }
 
     public void NextDialogue()
