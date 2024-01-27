@@ -71,6 +71,7 @@ public class Player : MonoBehaviour
     public bool isDashing = false;
     public bool canTPose;
     public bool canRagdoll;
+    public bool isShooted;
     private bool canDash = true;
 
     private bool tPoseHeals;
@@ -80,7 +81,7 @@ public class Player : MonoBehaviour
     private List<Collider> ragdollColl;
     private Vector2 moveDirection;
     private Vector3 lastMovement;
-    private bool isRagdoll = false;
+    public bool isRagdoll { get; private set; } = false;
     private bool isTPose = false;
     private bool isMoving;
     private bool canGetUp;
@@ -116,7 +117,9 @@ public class Player : MonoBehaviour
     {
         if (!isDashing && !isTPose)
         {
-            Move2(moveDirection);
+            if(!isShooted)
+                Move2(moveDirection);
+
             if (isRagdoll)
             {
                 boneToMove.GetComponent<Rigidbody>().MovePosition(transform.position);
@@ -302,13 +305,20 @@ public class Player : MonoBehaviour
 
     }
 
+
     //dopo il riposino
     public void SetRagdoll(bool value)
     {
          anim.enabled = !value;
         isRagdoll = value;
+
      
         rb.velocity = Vector3.zero;
+
+
+        
+        //rb.velocity = Vector3.zero;
+
 
         foreach (Rigidbody rb in ragdollRb)
         {
