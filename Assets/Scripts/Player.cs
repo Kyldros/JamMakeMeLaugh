@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
     private List<Collider> ragdollColl;
     private Vector2 moveDirection;
     private Vector3 lastMovement;
-    public bool isRagdoll { get; private set; } = false;
+    private bool isRagdoll = false;
     private bool isTPose = false;
     private bool isMoving;
     private bool canGetUp;
@@ -305,12 +305,10 @@ public class Player : MonoBehaviour
     //dopo il riposino
     public void SetRagdoll(bool value)
     {
-
-        anim.enabled = !value;
+         anim.enabled = !value;
         isRagdoll = value;
-
-        
-        //rb.velocity = Vector3.zero;
+     
+        rb.velocity = Vector3.zero;
 
         foreach (Rigidbody rb in ragdollRb)
         {

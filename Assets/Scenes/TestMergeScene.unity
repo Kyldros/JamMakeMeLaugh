@@ -608,6 +608,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &201684037
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 201684038}
+  m_Layer: 0
+  m_Name: leftArmStartPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &201684038
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201684037}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -1.8021266, y: 0.539, z: -1.8035129}
+  m_LocalScale: {x: 0.13862513, y: 0.13862513, z: 0.13862513}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 825313491}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!1 &202863414
 GameObject:
   m_ObjectHideFlags: 0
@@ -2148,6 +2179,8 @@ Transform:
   - {fileID: 1666945488}
   - {fileID: 848791492}
   - {fileID: 1981386760}
+  - {fileID: 201684038}
+  - {fileID: 1984096113}
   m_Father: {fileID: 1295743268}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &825313492
@@ -2284,14 +2317,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 848791491}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 1.8021262, y: -0.3936956, z: -1.8035129}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 1.802127, y: 0.539, z: -1.8035129}
   m_LocalScale: {x: 0.13862513, y: 0.13862513, z: 0.13862513}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1595985382}
   m_Father: {fileID: 825313491}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!1 &906133903
 GameObject:
   m_ObjectHideFlags: 0
@@ -4310,6 +4343,7 @@ MonoBehaviour:
   rb: {fileID: 1595985387}
   isAttacking: 0
   dropReachHeight: {fileID: 1981386759}
+  startPoint: {fileID: 1984096112}
 --- !u!65 &1595985384
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4432,14 +4466,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1666945487}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.802127, y: -0.3936956, z: -1.803513}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -1.8021266, y: 0.539, z: -1.8035129}
   m_LocalScale: {x: 0.13862513, y: 0.13862513, z: 0.13862513}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2060246252}
   m_Father: {fileID: 825313491}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!1 &1719652496
 GameObject:
   m_ObjectHideFlags: 0
@@ -5289,6 +5323,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 825313491}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1984096112
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1984096113}
+  m_Layer: 0
+  m_Name: rightArmStartPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1984096113
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984096112}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 1.802127, y: 0.539, z: -1.8035129}
+  m_LocalScale: {x: 0.13862513, y: 0.13862513, z: 0.13862513}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 825313491}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!1 &2060246251
 GameObject:
   m_ObjectHideFlags: 0
@@ -5345,6 +5410,7 @@ MonoBehaviour:
   rb: {fileID: 2060246257}
   isAttacking: 0
   dropReachHeight: {fileID: 1981386759}
+  startPoint: {fileID: 201684037}
 --- !u!65 &2060246254
 BoxCollider:
   m_ObjectHideFlags: 0
