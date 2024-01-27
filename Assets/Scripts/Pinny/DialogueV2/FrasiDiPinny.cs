@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "FraseDipenny", menuName = "Dialoghi/Frasi/FraseDiPenny")]
 public class FrasiDiPinny : ScriptableObject
@@ -20,6 +21,11 @@ public class FrasiDiPinny : ScriptableObject
 [Serializable]
 public class FrasiPenny
 {
-    public string frase;
+    public List<string> frase;
     public Sprite sprite;
+
+    public string GetPrhase()
+    {
+        return frase[Random.Range(0, frase.Count)];
+    }
 }
