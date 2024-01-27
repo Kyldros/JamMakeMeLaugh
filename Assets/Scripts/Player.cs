@@ -302,6 +302,7 @@ public class Player : MonoBehaviour
 
     }
 
+
     //dopo il riposino
     public void SetRagdoll(bool value)
     {
