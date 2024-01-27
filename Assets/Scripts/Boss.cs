@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.PlasticSCM.Editor.WebApi;
+using System;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 public class Boss : MonoBehaviour
@@ -10,14 +9,16 @@ public class Boss : MonoBehaviour
     [SerializeField] public float DelayAttacks;
     [SerializeField] private BossArm leftArm;
     [SerializeField] private BossArm RightArm;
+    [SerializeField] private float attackFollowDuration;
+   
 
-    private float journeyLength;
-    private float startTime;
     private Vector3 playerPos;
-    
+
     private int currentHp;
     private Animator anim;
-    private bool starting;
+
+    private float timerAttack;
+    private float timerFollow;
     private void Awake()
     {
         currentHp = hpMax;
@@ -32,7 +33,7 @@ public class Boss : MonoBehaviour
     {
         currentHp -= damage;
         Debug.Log(currentHp);
-        if(currentHp <= 0) 
+        if (currentHp <= 0)
         {
             anim.SetTrigger("Death");
             Debug.Log("yeeeee boss morto");
@@ -41,42 +42,53 @@ public class Boss : MonoBehaviour
         }
     }
 
-    // Calculate the fraction of the journey completed
-    
-    public void Update() 
+
+    public void Update()
     {
-        if(leftArm.isAttacking)
+        if (leftArm.isAttacking)
         {
-            if(!starting)
-            {
-                startTime = Time.deltaTime;
-                starting = true;
-            }
             
-            journeyLength = Vector3.Distance(transform.position, new Vector3(playerPos.x, leftArm.transform.position.y, playerPos.z));
-            float distCovered = (Time.time - startTime) * leftArm.armSpeed;
-
-            playerPos = GameManager.Instance.transform.position;
-            float fracJourney = distCovered / journeyLength;
-
-            leftArm.transform.position = Vector3.Lerp(transform.position, new Vector3(playerPos.x, leftArm.transform.position.y, playerPos.z), fracJourney);
+            if (timerFollow >= attackFollowDuration)
+            {
+                DropArm(leftArm);
+            }
+            else
+            {
+                ArmAttack(leftArm);
+                timerFollow += Time.deltaTime;
+            }
         }
-        else if(RightArm.isAttacking)
+        else if (RightArm.isAttacking)
         {
 
         }
     }
 
-    public void StartLeftAttack()
+    private void ArmAttack(BossArm arm)
     {
-        leftArm.isAttacking = true;
-        anim.SetTrigger("StartLeftAttack");
+        arm.coll.isTrigger = false;
+        timerAttack += arm.armMoveSpeed * Time.deltaTime;
+        timerAttack = Mathf.Clamp01(timerAttack);
+        playerPos = GameManager.Instance.player.transform.position;
+        arm.transform.position = Vector3.Lerp(arm.transform.position, new Vector3(playerPos.x, arm.transform.position.y, playerPos.z), timerAttack);
+    }
+
+    private void DropArm(BossArm arm)
+    {
+        arm.coll.isTrigger = true;
+        timerAttack += arm.armDropSpeed * Time.deltaTime;
+        timerAttack = Mathf.Clamp01(timerAttack);
+        playerPos = GameManager.Instance.player.transform.position;
+        arm.transform.position = Vector3.Lerp(arm.transform.position, new Vector3(arm.transform.position.x, arm.dropReachHeight.transform.position.y, playerPos.z), timerAttack);
+        if (Vector3.Distance(arm.transform.position, new Vector3(arm.transform.position.x, arm.dropReachHeight.transform.position.y, playerPos.z)) <= 0.2)
+        {
+            arm.isAttacking = false;
+        }
+        
     }
     public void LeftAttack()
     {
-        //Usare lerp , e moveTo
-       
-        
+        leftArm.isAttacking = true;
     }
     public void StartRightAttack()
     {
@@ -85,8 +97,8 @@ public class Boss : MonoBehaviour
     }
     public void RightAttack()
     {
-        
+
     }
 
-   
+
 }

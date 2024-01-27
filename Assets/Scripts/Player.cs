@@ -14,7 +14,6 @@ public class Player : MonoBehaviour
     [SerializeField] private float sprintSpeed;
 
     [Header("Ragdoll")]
-    [SerializeField] private float ragdollTimerTrap;
     [SerializeField] private float ragdollImmuneDuration;
     [SerializeField] private float ragdollImmuneDurationUpgrade;
     [SerializeField] private float ragdollCooldown;
@@ -154,9 +153,9 @@ public class Player : MonoBehaviour
     //Guardare dopo riposino
     public void Ragdoll(InputAction.CallbackContext context)
     {
-        if (context.performed && ragdollUnlocked && !isDashing && !isTPose )
+        if (context.performed && ragdollUnlocked && !isDashing && !isTPose && canRagdoll)
         {
-            SetRagdoll(!isRagdoll, false);
+            SetRagdoll(!isRagdoll);
         }
     }
     public void Dash(InputAction.CallbackContext context)
@@ -209,12 +208,10 @@ public class Player : MonoBehaviour
             }
         }
     }
-
     private void HealPlayer(bool tPoseHeals)
     {
         throw new System.NotImplementedException();
     }
-
     private void SetTPose(bool value)
     {
         canDash = !value;
@@ -306,51 +303,43 @@ public class Player : MonoBehaviour
     }
 
     //dopo il riposino
-    public void SetRagdoll(bool value, bool hasTimer)
+    public void SetRagdoll(bool value)
     {
 
-        anim.enabled = (!hasTimer && !tempBool) ? !value : (canGetUp ? true : false);
+        anim.enabled = !value;
         isRagdoll = value;
-        canRagdoll = false;
 
+        
         rb.velocity = Vector3.zero;
 
         foreach (Rigidbody rb in ragdollRb)
         {
-            rb.isKinematic = (!hasTimer && !tempBool) ? !value : canGetUp;
+            //?
+            rb.isKinematic = !value;
         }
         foreach (Collider col in ragdollColl)
         {
-            col.enabled = (!hasTimer && !tempBool) ? value : !canGetUp;
-        }
-
-        if (!hasTimer && !tempBool)
-        {
-            audioManager.PlayAudio(clipRagdoll);
-            canRagdoll = false;
-            SetRagdollImmune();
-
-        }
-        else if (!canGetUp)
-        {
-            audioManager.PlayAudio(clipRagdoll);
-            StartCoroutine(nameof(timerRagdool));
-
+            col.enabled = value;
         }
 
         if (value == true)
         {
+            audioManager.PlayAudio(clipRagdoll);
+            SetRagdollImmune();
+
             SetOutlineColor(ragdollColor);
             coll.height = 0.3f;
-            
+
         }
         else
         {
             coll.height = 1.7f;
-            coll.center = new Vector3(0,0.75f, 0);
+            coll.center = new Vector3(0, 0.75f, 0);
+            canRagdoll = false;
             StartCoroutine(nameof(startRagdollCooldown));
             TurnOffOutline();
         }
+
     }
 
     public void takeDamage(int damage)
@@ -407,14 +396,6 @@ public class Player : MonoBehaviour
 
         botParent.transform.rotation = Quaternion.Euler(tPoseStartAngle);
 
-
-    }
-    public IEnumerator timerRagdool()
-    {
-
-        yield return new WaitForSeconds(ragdollTimerTrap);
-        canRagdoll = true;
-        tempBool = true;
 
     }
     public void PlayStepClip(AudioClip[] clipList)
