@@ -7,7 +7,10 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    public TextMeshProUGUI startText;
+    public Image startImageReference;
+    public Sprite startSprite;
+    public Sprite continueSprite;
+
     public GameObject confirmationPanel;
 
     public ButtonSelection menuSelection;
@@ -57,17 +60,17 @@ public class MenuManager : MonoBehaviour
 
     public void SetContinue()
     {
-        if (startText != null)
+        if (startImageReference != null)
         {
-            startText.text = "Continue";
+            startImageReference.sprite = continueSprite;
         }
     }
 
     public void SetStart()
     {
-        if (startText != null)
+        if (startImageReference != null)
         {
-            startText.text = "Start";
+            startImageReference.sprite = startSprite;
         }
     }
 
