@@ -309,12 +309,16 @@ public class Player : MonoBehaviour
     //dopo il riposino
     public void SetRagdoll(bool value)
     {
-
-        anim.enabled = !value;
+         anim.enabled = !value;
         isRagdoll = value;
+
+     
+        rb.velocity = Vector3.zero;
+
 
         
         //rb.velocity = Vector3.zero;
+
 
         foreach (Rigidbody rb in ragdollRb)
         {

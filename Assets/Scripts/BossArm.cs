@@ -16,6 +16,9 @@ public class BossArm : MonoBehaviour
     public Rigidbody rb;
     public bool isAttacking;
     public GameObject dropReachHeight;
+    public GameObject startPoint;
+    public GameObject pivot;
+    public bool isRight;
     private void OnEnable()
     {
         coll = GetComponent<Collider>();
