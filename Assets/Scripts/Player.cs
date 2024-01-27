@@ -28,13 +28,13 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float groundCheckDistance = 0.2f;
 
+
     [Header("TPose")]
     [SerializeField] private float tPoseSpeed;
     [SerializeField] private float tPoseDuration;
     [SerializeField] private float tPoseCooldown;
     [SerializeField] private int healOnTPose;
     [SerializeField] private int healOnTPoseUpgrade;
-
 
     [Header("Damage System")]
     public int maxHp = 5;
@@ -74,10 +74,11 @@ public class Player : MonoBehaviour
     public bool canRagdoll;
     public bool isShooted;
     private bool canDash = true;
+    public bool isGrounded;
 
     private bool tPoseHeals;
-    
-    private bool isGrounded;
+
+
     private List<Rigidbody> ragdollRb;
     private List<Collider> ragdollColl;
     private Vector2 moveDirection;
@@ -86,6 +87,9 @@ public class Player : MonoBehaviour
     private bool isTPose = false;
     private bool isMoving;
     private bool canGetUp;
+    private bool isJumping;
+
+    private GameObject TposeAudioClipObject;
 
     private Vector3 tPoseStartAngle;
     Vector3 movement;
@@ -116,9 +120,18 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
-        if (!isDashing && !isTPose)
+        
+        if (isJumping && Physics.Raycast(transform.position, Vector3.down, groundCheckDistance/2, groundLayer))
         {
-            if(!isShooted)
+            isGrounded = true;
+            anim.SetTrigger("isGrounded");
+            isJumping = false;
+
+
+        }
+        else if (!isDashing && !isTPose)
+        {
+            if (!isShooted)
                 Move2(moveDirection);
 
             if (isRagdoll)
@@ -151,11 +164,16 @@ public class Player : MonoBehaviour
         ragdollColl = GetComponentsInChildren<Collider>().ToList();
         ragdollColl.RemoveAt(0);
 
+
         anim = GetComponentInChildren<Animator>();
         anim.applyRootMotion = false;
     }
 
     //Guardare dopo riposino
+    public LayerMask GetGroundLayer()
+    {
+        return groundLayer;
+    }
     public void Ragdoll(InputAction.CallbackContext context)
     {
         if (context.performed && ragdollUnlocked && !isDashing && !isTPose && canRagdoll)
@@ -185,8 +203,12 @@ public class Player : MonoBehaviour
     {
         if (context.performed && Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer))
         {
-            // Add force in the upward direction to simulate jumping
-            Debug.Log("Isjumping");
+            if (!isRagdoll)
+            {
+                anim.SetTrigger("isJumping");
+            }
+            isJumping = true;
+            isGrounded = false;
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
@@ -201,13 +223,13 @@ public class Player : MonoBehaviour
                 canTPose = false;
                 isTPose = true;
                 anim.SetTrigger("isTPose");
-                audioManager.PlayAudio(tPoseClip);
                 SetOutlineColor(TPoseColor);
 
                 if (tPoseHeals)
                 {
                     HealPlayer(tPoseHeals);
                 }
+
                 StartCoroutine(nameof(startTPoseCooldown));
                 StartCoroutine(nameof(timerEndTPose));
             }
@@ -216,12 +238,6 @@ public class Player : MonoBehaviour
     private void HealPlayer(bool tPoseHeals)
     {
         throw new System.NotImplementedException();
-    }
-    private void SetTPose(bool value)
-    {
-        canDash = !value;
-        isTPose = value;
-        rb.useGravity = !value;
     }
     public void Move(InputAction.CallbackContext context)
     {
@@ -308,14 +324,14 @@ public class Player : MonoBehaviour
     }
     public void SetRagdoll(bool value)
     {
-         anim.enabled = !value;
+        anim.enabled = !value;
         isRagdoll = value;
 
-     
+
         rb.velocity = Vector3.zero;
 
 
-        
+
         //rb.velocity = Vector3.zero;
 
 
@@ -336,6 +352,7 @@ public class Player : MonoBehaviour
 
             SetOutlineColor(ragdollColor);
             coll.height = 0.3f;
+            coll.center = new Vector3(0, 0.325f, 0);
 
         }
         else
@@ -371,9 +388,12 @@ public class Player : MonoBehaviour
     }
     public IEnumerator startTPoseCooldown()
     {
+
+
         yield return new WaitForSeconds(tPoseCooldown);
         canTPose = true;
         Debug.Log("Tpose Ready");
+
     }
     public IEnumerator startRagdollCooldown()
     {
@@ -394,27 +414,37 @@ public class Player : MonoBehaviour
     }
     public IEnumerator timerEndTPose()
     {
+        TposeAudioClipObject = Instantiate(new GameObject());
+        AudioSource source = TposeAudioClipObject.AddComponent<AudioSource>();
+        source.clip = tPoseClip;
+        source.Play();
+
         yield return new WaitForSeconds(tPoseDuration);
+
         isTPose = false;
         canDash = true;
         rb.velocity = Vector3.zero;
         TurnOffOutline();
-        audioManager.StopAudio(audioManager.GetComponent<AudioSource>());
+
+        TposeAudioClipObject.GetComponent<AudioSource>().mute = true;
+        TposeAudioClipObject.GetComponent<AudioSource>().Stop();
+        TposeAudioClipObject.SetActive(false);
+        Destroy(TposeAudioClipObject.gameObject);
+
         anim.SetTrigger("isExitingTPose");
 
         botParent.transform.rotation = Quaternion.Euler(tPoseStartAngle);
 
-
     }
     public void PlayStepClip()
     {
-        int randomInt = UnityEngine.Random.Range(0, stepsClips.Length );
+        int randomInt = UnityEngine.Random.Range(0, stepsClips.Length);
         AudioClip clipToPlay = stepsClips[randomInt];
         audioManager.PlayAudio(clipToPlay);
     }
     public void PlayRagdollClip(AudioClip[] clipList)
     {
-        int randomInt = UnityEngine.Random.Range(0, clipList.Length );
+        int randomInt = UnityEngine.Random.Range(0, clipList.Length);
         AudioClip clipToPlay = clipList[randomInt];
         audioManager.PlayAudio(clipToPlay);
     }
@@ -494,7 +524,7 @@ public class Player : MonoBehaviour
     }
     internal void UnregisterPlatform(PlatformerEffector3D platformerEffector3D)
     {
-        if(currentPlatform != null && currentPlatform == platformerEffector3D)
+        if (currentPlatform != null && currentPlatform == platformerEffector3D)
         {
             currentPlatform = null;
         }
@@ -504,11 +534,15 @@ public class Player : MonoBehaviour
         currentPlatform = platformerEffector3D;
     }
 
-    public void EndGame()
+    public void WinGame(GameObject dancePoint)
     {
         GameManager.Instance.DisablePlayerInput();
+        transform.position = dancePoint.transform.position;
+        anim.applyRootMotion = true;
+        rb.velocity = Vector3.zero;
         anim.SetTrigger("BossDead");
+        GameManager.Instance.audioManager.PlayMusic(GameManager.Instance.bossFightMusic);
     }
-   
+
 }
 
