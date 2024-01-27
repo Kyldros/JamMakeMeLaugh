@@ -7,13 +7,21 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    public TextMeshProUGUI startText;
+    public Image startImageReference;
+    public Sprite startSprite;
+    public Sprite continueSprite;
+    public Sprite restartSprite;
+
     public GameObject confirmationPanel;
 
     public ButtonSelection menuSelection;
     public ButtonSelection confirmationSelection;
     public List<AudioClip> selectionMenu;
     private ButtonSelection currentSelection;
+
+    public Image titleImage;
+    public Sprite loseSprite;
+    public Sprite winSprite;
 
     private void Start()
     {
@@ -57,18 +65,35 @@ public class MenuManager : MonoBehaviour
 
     public void SetContinue()
     {
-        if (startText != null)
+        if (startImageReference != null)
         {
-            startText.text = "Continue";
+            startImageReference.sprite = continueSprite;
         }
     }
 
     public void SetStart()
     {
-        if (startText != null)
+        if (startImageReference != null)
         {
-            startText.text = "Start";
+            startImageReference.sprite = startSprite;
         }
+    }
+
+    public void SetRestart()
+    {
+        if (startImageReference != null)
+        {
+            startImageReference.sprite = restartSprite;
+        }
+    }
+
+    public void SetWinImage()
+    {
+        titleImage.sprite = winSprite;
+    }
+    public void SetLoseImage()
+    {
+        titleImage.sprite = loseSprite;
     }
 
     public void ExitMenu()
@@ -95,4 +120,17 @@ public class MenuManager : MonoBehaviour
         else
             return null;
     }
+
+    public void WinGame()
+    {
+        SetRestart();
+        SetWinImage();
+    }
+
+    public void LoseGame()
+    {
+        SetRestart();
+        SetLoseImage();
+    }
+
 }

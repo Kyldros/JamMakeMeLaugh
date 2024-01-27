@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
     [Header("Audio")]
     public AudioManager audioManager;
     public AudioClip[] stepsClips;
-    public AudioClip clipRagdoll;
+    public AudioClip[] clipsRagdoll;
     public AudioClip clipDash;
     public AudioClip tPoseClip;
 
@@ -59,6 +59,7 @@ public class Player : MonoBehaviour
 
 
     [Header("Non toccare chiedi al programmer"), Description("si capito bene, non toccare o ti taglio il bisnelo")]
+    public bool canTakeDamage = true;
     public GameObject botMesh;
     public GameObject botParent;
     public GameObject boneToMove;
@@ -71,16 +72,17 @@ public class Player : MonoBehaviour
     public bool isDashing = false;
     public bool canTPose;
     public bool canRagdoll;
+    public bool isShooted;
     private bool canDash = true;
 
     private bool tPoseHeals;
-    private bool canTakeDamage;
+    
     private bool isGrounded;
     private List<Rigidbody> ragdollRb;
     private List<Collider> ragdollColl;
     private Vector2 moveDirection;
     private Vector3 lastMovement;
-    public bool isRagdoll = false;
+    public bool isRagdoll { get; private set; } = false;
     private bool isTPose = false;
     private bool isMoving;
     private bool canGetUp;
@@ -116,7 +118,9 @@ public class Player : MonoBehaviour
     {
         if (!isDashing && !isTPose)
         {
-            Move2(moveDirection);
+            if(!isShooted)
+                Move2(moveDirection);
+
             if (isRagdoll)
             {
                 boneToMove.GetComponent<Rigidbody>().MovePosition(transform.position);
@@ -148,6 +152,7 @@ public class Player : MonoBehaviour
         ragdollColl.RemoveAt(0);
 
         anim = GetComponentInChildren<Animator>();
+        anim.applyRootMotion = false;
     }
 
     //Guardare dopo riposino
@@ -301,15 +306,18 @@ public class Player : MonoBehaviour
         anim.SetBool("isMoving", isMoving);
 
     }
-
-
-    //dopo il riposino
     public void SetRagdoll(bool value)
     {
          anim.enabled = !value;
         isRagdoll = value;
+
      
         rb.velocity = Vector3.zero;
+
+
+        
+        //rb.velocity = Vector3.zero;
+
 
         foreach (Rigidbody rb in ragdollRb)
         {
@@ -323,7 +331,7 @@ public class Player : MonoBehaviour
 
         if (value == true)
         {
-            audioManager.PlayAudio(clipRagdoll);
+            PlayRagdollClip(clipsRagdoll);
             SetRagdollImmune();
 
             SetOutlineColor(ragdollColor);
@@ -340,12 +348,12 @@ public class Player : MonoBehaviour
         }
 
     }
-
     public void takeDamage(int damage)
     {
         if (canTakeDamage)
         {
             currentHP -= damage;
+            Debug.Log(currentHP);
             if (currentHP <= 0)
                 onDeath?.Invoke();
             else
@@ -391,19 +399,24 @@ public class Player : MonoBehaviour
         canDash = true;
         rb.velocity = Vector3.zero;
         TurnOffOutline();
+        audioManager.StopAudio(audioManager.GetComponent<AudioSource>());
         anim.SetTrigger("isExitingTPose");
 
         botParent.transform.rotation = Quaternion.Euler(tPoseStartAngle);
 
 
     }
-    public void PlayStepClip(AudioClip[] clipList)
+    public void PlayStepClip()
     {
-        int randomInt = UnityEngine.Random.Range(0, clipList.Length - 1);
+        int randomInt = UnityEngine.Random.Range(0, stepsClips.Length );
+        AudioClip clipToPlay = stepsClips[randomInt];
+        audioManager.PlayAudio(clipToPlay);
+    }
+    public void PlayRagdollClip(AudioClip[] clipList)
+    {
+        int randomInt = UnityEngine.Random.Range(0, clipList.Length );
         AudioClip clipToPlay = clipList[randomInt];
         audioManager.PlayAudio(clipToPlay);
-
-
     }
     public void UnlockRagdoll()
     {
@@ -443,7 +456,6 @@ public class Player : MonoBehaviour
     {
         mat.SetColor("_Color", new Color(0, 0, 0, 0));
     }
-
     public void UpgradeRandomAbility()
     {
         int tempInt = Random.Range(0, 3);
@@ -480,7 +492,6 @@ public class Player : MonoBehaviour
     {
 
     }
-
     internal void UnregisterPlatform(PlatformerEffector3D platformerEffector3D)
     {
         if(currentPlatform != null && currentPlatform == platformerEffector3D)
@@ -488,10 +499,16 @@ public class Player : MonoBehaviour
             currentPlatform = null;
         }
     }
-
     internal void RegisterPlatform(PlatformerEffector3D platformerEffector3D)
     {
         currentPlatform = platformerEffector3D;
     }
+
+    public void EndGame()
+    {
+        GameManager.Instance.DisablePlayerInput();
+        anim.SetTrigger("BossDead");
+    }
+   
 }
 
