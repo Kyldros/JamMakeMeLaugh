@@ -304,9 +304,6 @@ public class Player : MonoBehaviour
         anim.SetBool("isMoving", isMoving);
 
     }
-
-
-    //dopo il riposino
     public void SetRagdoll(bool value)
     {
          anim.enabled = !value;
@@ -349,12 +346,12 @@ public class Player : MonoBehaviour
         }
 
     }
-
     public void takeDamage(int damage)
     {
         if (canTakeDamage)
         {
             currentHP -= damage;
+            Debug.Log("currentHp");
             if (currentHP <= 0)
                 onDeath?.Invoke();
             else

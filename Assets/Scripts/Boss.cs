@@ -33,7 +33,7 @@ public class Boss : MonoBehaviour
     private void Start()
     {
         anim.SetTrigger("Intro");       
-        StartLeftAttack();
+        StartOtherHandAttack();
     }
     public void TakeDamage(int damage)
     {
@@ -107,8 +107,7 @@ public class Boss : MonoBehaviour
         timerAttack += arm.armMoveSpeed * Time.deltaTime;
         timerAttack = Mathf.Clamp01(timerAttack);
         playerPos = GameManager.Instance.player.transform.position;
-        arm.pivot.transform.position = Vector3.Lerp(arm.pivot.transform.position, new Vector3(playerPos.x, arm.pivot.transform.position.y, playerPos.z), timerAttack);
-        
+        arm.transform.position = Vector3.Lerp(arm.transform.position, new Vector3(playerPos.x, arm.pivot.transform.position.y, playerPos.z), timerAttack);        
     }
 
     private void DropArm(BossArm arm)
@@ -124,7 +123,6 @@ public class Boss : MonoBehaviour
         }
 
     }
-
     private void RaiseArm(BossArm arm)
     {
         timer2 += arm.armDropSpeed * Time.deltaTime;
@@ -136,18 +134,16 @@ public class Boss : MonoBehaviour
            moveArm = true;
         }
     }
-
     private void MoveArm(BossArm arm)
     {
-        arm.coll.isTrigger = true;
+        arm.coll.isTrigger = false;
         timer3 += arm.armDropSpeed * Time.deltaTime;
         timer3 = Mathf.Clamp01(timer3);
-        playerPos = GameManager.Instance.player.transform.position;
-        arm.pivot.transform.position = Vector3.Lerp(arm.pivot.transform.position, arm.startPoint.transform.position, timer3);
+        arm.transform.position = Vector3.Lerp(arm.transform.position, arm.startPoint.transform.position, timer3);
 
-        if (Vector3.Distance(arm.pivot.transform.position, arm.startPoint.transform.position) <= 0.2)
+        if (Vector3.Distance(arm.transform.position, arm.startPoint.transform.position) <= 0.2)
         {
-            anim.enabled = false;
+            anim.enabled = true;
             arm.isAttacking = false;            
             SetArmEndAnimation(arm.isRight);
             StartOtherHandAttack();
@@ -160,6 +156,7 @@ public class Boss : MonoBehaviour
         {
             StartLeftAttack();
             currentAttackisRight = false;
+
         }
         else
         {
@@ -176,7 +173,6 @@ public class Boss : MonoBehaviour
         
 
     }
-
 
     public void LeftAttack()
     {
