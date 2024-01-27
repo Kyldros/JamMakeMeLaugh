@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public PlayerInput playerInput;
     public Player player;
+
     public GameObject pinny;
     public GameObject menu;
     public bool isPaused { get; private set; } = false;
