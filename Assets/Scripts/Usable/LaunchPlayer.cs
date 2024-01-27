@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class LaunchPlayer : MonoBehaviour
@@ -9,6 +11,18 @@ public class LaunchPlayer : MonoBehaviour
     public bool is45Degree = false;
     public bool otherDirection = false;
 
+    Animator anim;
+    public AnimatorController degree45Cont;
+    public AnimatorController degree90Cont;
+
+    void Start()
+    {
+        anim = GetComponent<Animator>();
+        if(is45Degree)
+            anim.runtimeAnimatorController = degree45Cont;
+        else
+            anim.runtimeAnimatorController = degree90Cont;
+    }
 
     void ShootObject(Rigidbody objectToShoot)
     {
@@ -27,15 +41,24 @@ public class LaunchPlayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
-        //if (other.GetComponent<Player>())
-        //{
-        //    other.GetComponent<Player>().isKinematic = false;
-        //    if()
-        //    ShootObject(other.GetComponent<Rigidbody>());
-        //}
-            
-
+        Player player = other.GetComponent<Player>();
+        if (player != null)
+        {
+            if (is45Degree)
+            {
+                if (player.isDashing)
+                {
+                    ShootObject(player.rb);
+                }
+            }
+            else
+            {
+                if (player.isRagdoll)
+                {
+                    ShootObject(player.rb);
+                }
+            }
+        }
     }
 
 }
