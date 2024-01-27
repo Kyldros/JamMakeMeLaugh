@@ -20,19 +20,20 @@ public class LaunchPlayer : MonoBehaviour
             else
                 direction = new Vector3(-1, 1, 0);
             
-        }
-           
+        } 
 
         objectToShoot.AddForce( direction * force, ForceMode.Impulse);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Rigidbody>())
-        {
-            other.GetComponent<Rigidbody>().isKinematic = false;
-            ShootObject(other.GetComponent<Rigidbody>());
-        }
+        
+        //if (other.GetComponent<Player>())
+        //{
+        //    other.GetComponent<Player>().isKinematic = false;
+        //    if()
+        //    ShootObject(other.GetComponent<Rigidbody>());
+        //}
             
 
     }

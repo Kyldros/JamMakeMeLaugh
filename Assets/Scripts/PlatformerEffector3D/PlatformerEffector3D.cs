@@ -20,6 +20,11 @@ public class PlatformerEffector3D : MonoBehaviour
     {
         Vector3 direction = other.transform.position - transform.position;
 
+        if (other.GetComponent<Player>())
+        {
+            other.GetComponent<Player>().RegisterPlatform(this);
+        }
+
         if (direction.y < 0)
         {
             DisableCollider();
@@ -29,6 +34,10 @@ public class PlatformerEffector3D : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         EnableCollider();
+        if (other.GetComponent<Player>())
+        {
+            other.GetComponent<Player>().UnregisterPlatform(this);
+        }
     }
 
 }
