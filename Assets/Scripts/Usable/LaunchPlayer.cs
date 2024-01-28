@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class LaunchPlayer : MonoBehaviour
@@ -11,12 +6,10 @@ public class LaunchPlayer : MonoBehaviour
     public bool is45Degree = false;
     public bool otherDirection = false;
     public float disableInputDuration = 2f;
-    
+
     Animator anim;
-    public AnimatorController degree45Cont;
-    public AnimatorController degree90Cont;
-    public AnimatorController degree45Loop;
-    public AnimatorController degree90loop;
+    public RuntimeAnimatorController degree45Loop;
+    public RuntimeAnimatorController degree90loop;
     public Animator loopAnimator;
     public GameObject shotAnimationObject;
     public GameObject visual;
@@ -30,12 +23,10 @@ public class LaunchPlayer : MonoBehaviour
         if (is45Degree)
         {
             loopAnimator.runtimeAnimatorController = degree45Loop;
-            anim.runtimeAnimatorController = degree45Cont;
         }
         else
         {
             loopAnimator.runtimeAnimatorController = degree90loop;
-            anim.runtimeAnimatorController = degree90Cont;
         }
     }
 
@@ -43,7 +34,7 @@ public class LaunchPlayer : MonoBehaviour
     {
         if (isDisabled)
         {
-            if(Time.time - startTime > disableInputDuration)
+            if (Time.time - startTime > disableInputDuration)
             {
                 GameManager.Instance.EnablePlayerInput();
                 isDisabled = false;
@@ -70,12 +61,12 @@ public class LaunchPlayer : MonoBehaviour
         Vector3 direction = Vector3.up;
         if (is45Degree)
         {
-            if(otherDirection)
+            if (otherDirection)
                 direction = new Vector3(1, 1, 0);
             else
                 direction = new Vector3(-1, 1, 0);
-            
-        } 
+
+        }
 
         player.rb.AddForce(direction * force, ForceMode.Impulse);
         visual.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
@@ -83,7 +74,7 @@ public class LaunchPlayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<Player>())
+        if (other.GetComponent<Player>())
             player = other.GetComponent<Player>();
 
         if (player != null)
