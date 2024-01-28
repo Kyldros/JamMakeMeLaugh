@@ -30,7 +30,8 @@ public class BossArm : MonoBehaviour
     {
         if(collision.gameObject.TryGetComponent<Player>(out Player player))
         {
-            if (player.isDashing && !isAttacking)
+            Debug.Log("cacca");
+            if (player.isDashing && !isAttacking && boss.alive)
             {
                 GameManager.Instance.audioManager.PlayAudio(clipTestata);
                 boss.TakeDamage(player.damage);
@@ -42,7 +43,7 @@ public class BossArm : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent<Player>(out Player player))
         {         
-            if (isAttacking)
+            if (isAttacking && boss.alive)
             {
                 player.takeDamage(armDamage);
             }
