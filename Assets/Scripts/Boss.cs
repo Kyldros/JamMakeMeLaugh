@@ -6,7 +6,7 @@ public class Boss : MonoBehaviour
 {
     [SerializeField] int hpMax;
     [SerializeField] float attackFollowPlayerTimer;
-    [SerializeField] public float DelayAttacks;
+    
     [SerializeField] private BossArm leftArm;
     [SerializeField] private BossArm rightArm;
     [SerializeField] private float attackFollowDuration;
