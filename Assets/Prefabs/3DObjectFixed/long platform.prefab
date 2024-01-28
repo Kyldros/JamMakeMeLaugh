@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 6726313500118395062}
   - component: {fileID: 2933702370316393128}
   - component: {fileID: 3746246100284302635}
-  m_Layer: 0
+  - component: {fileID: 1105026495783317602}
+  m_Layer: 9
   m_Name: pCube12_Long_platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,6 +84,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1105026495783317602
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2229851761767503539}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.9971505, y: 0.13344851, z: 3.0869079}
+  m_Center: {x: 0.0022791028, y: 0.00030406192, z: 0.08411056}
 --- !u!1 &2758529041081798484
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,7 +116,7 @@ GameObject:
   - component: {fileID: 2676616457054212435}
   - component: {fileID: 7394407741805246465}
   - component: {fileID: 8726463199400837810}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Long_platform_pCylinder13_long_tube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +199,7 @@ GameObject:
   - component: {fileID: 2036501017866622453}
   - component: {fileID: 711635587237055854}
   - component: {fileID: 6258325489163499532}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Long_platform_long_tube_pCylinder1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +280,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1190481224171198591}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: long platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +317,7 @@ GameObject:
   - component: {fileID: 6802591656669001289}
   - component: {fileID: 2725023125689019868}
   - component: {fileID: 3505816469133179170}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Long_platform_long_tube_pCylinder12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
