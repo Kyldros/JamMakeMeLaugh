@@ -43,8 +43,7 @@ public class Boss : MonoBehaviour
     }
     private void Start()
     {
-        anim.SetTrigger("Intro");       
-        StartOtherHandAttack();
+       
     }
     public void TakeDamage(int damage)
     {
@@ -241,6 +240,14 @@ public class Boss : MonoBehaviour
         int randomInt = UnityEngine.Random.Range(0, attackVoiceClip.Length);
         AudioClip clipToPlay = attackVoiceClip[randomInt];
         GameManager.Instance.audioManager.PlayAudio(clipToPlay);
+    }
+    public void StartIntro()
+    {
+        if (alive)
+        {
+            anim.SetTrigger("Intro");
+            StartOtherHandAttack();
+        }
     }
 
 }
