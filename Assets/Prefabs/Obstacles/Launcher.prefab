@@ -51,8 +51,14 @@ MonoBehaviour:
   force: 100
   is45Degree: 0
   otherDirection: 0
-  degree45Cont: {fileID: 0}
-  degree90Cont: {fileID: 0}
+  disableInputDuration: 2
+  degree45Cont: {fileID: 9100000, guid: 2afd4da292ce7b54a97d9ec3d7cd2ac3, type: 2}
+  degree90Cont: {fileID: 9100000, guid: c9ab530e5a336a94b943558b5a7c060d, type: 2}
+  degree45Loop: {fileID: 9100000, guid: 7b9297927306180488f446e3bd554d91, type: 2}
+  degree90loop: {fileID: 9100000, guid: 678ccba7a243cd8488fb00b22840adfd, type: 2}
+  loopAnimator: {fileID: 8198954413654921465}
+  shotAnimationObject: {fileID: 8423966687123627611}
+  visual: {fileID: 5886257199921802564}
 --- !u!65 &452357588587036987
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -124,8 +130,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8047658386361202050}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -170,15 +176,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 90b3104b60e363a48a235e64389a98c0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 34.25836, y: 27.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &5498009318848420709
