@@ -98,4 +98,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pivot: {fileID: 0}
   material: {fileID: 2100000, guid: 4350d532b4802874592104ac02a8c656, type: 2}
-  velocityMultiplyier: 0.01
+  velocityMultiplyier: -0.01
