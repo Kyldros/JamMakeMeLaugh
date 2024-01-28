@@ -14,7 +14,7 @@ public class Hp : MonoBehaviour
     {
         int x = GameManager.Instance.player.currentHP;
 
-        if (x == 3)
+        if (x >= 3)
             hpImage.sprite = hpFull;
         if (x == 2)
             hpImage.sprite = hpMedio;

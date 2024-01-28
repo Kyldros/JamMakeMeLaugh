@@ -109,6 +109,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         currentHP = maxHp;
+        onDamage?.Invoke();
         foreach (Rigidbody rb in ragdollRb)
         {
             rb.isKinematic = true;
@@ -227,7 +228,7 @@ public class Player : MonoBehaviour
 
                 if (tPoseHeals)
                 {
-                    HealPlayer(tPoseHeals);
+                    HealPlayer();
                 }
 
                 StartCoroutine(nameof(startTPoseCooldown));
@@ -235,9 +236,13 @@ public class Player : MonoBehaviour
             }
         }
     }
-    private void HealPlayer(bool tPoseHeals)
+    private void HealPlayer()
     {
-        throw new System.NotImplementedException();
+        currentHP++;
+        if (currentHP > maxHp)
+            currentHP = maxHp;
+
+        onDamage?.Invoke();
     }
     public void Move(InputAction.CallbackContext context)
     {
@@ -377,6 +382,7 @@ public class Player : MonoBehaviour
                 onDamage?.Invoke();
 
             SetNormalImmune();
+            UpgradeRandomAbility();
         }
 
     }
@@ -518,10 +524,7 @@ public class Player : MonoBehaviour
     {
         healOnTPose += healOnTPoseUpgrade;
     }
-    public void StopDash()
-    {
 
-    }
     internal void UnregisterPlatform(PlatformerEffector3D platformerEffector3D)
     {
         if (currentPlatform != null && currentPlatform == platformerEffector3D)
