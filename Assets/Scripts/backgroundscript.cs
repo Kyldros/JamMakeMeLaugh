@@ -15,7 +15,7 @@ public class backgroundscript : MonoBehaviour
     {
         float newOffset = GameManager.Instance.player.moveDirection.x;
         newOffset *= -1;
-        material.SetTextureOffset("_MainTex", new Vector2(Time.time * newOffset, 0));
+        //material.SetTextureOffset()
     }
 
 }
