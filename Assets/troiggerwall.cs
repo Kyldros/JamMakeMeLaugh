@@ -10,9 +10,9 @@ public class troiggerwall : MonoBehaviour
     {
         if (other.TryGetComponent<Player>(out Player player))
         {            
-            bossWall.gameObject.active = false;
+            bossWall.gameObject.SetActive(false);
         }
 
     }
-    }
+}
     
