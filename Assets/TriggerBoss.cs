@@ -12,7 +12,7 @@ public class TriggerBoss : MonoBehaviour
         {
             boss.transform.localPosition = new Vector3(boss.transform.position.x, boss.transform.position.y, 7.23f);
             boss.GetComponentInChildren<Boss>().StartIntro();
-            bossWall.gameObject.active = false;
+           
         }
     }
 }
