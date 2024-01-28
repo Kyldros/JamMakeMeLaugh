@@ -45,5 +45,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 0}
+  player: {fileID: 0}
   pinny: {fileID: 0}
   menu: {fileID: 0}
+  audioManager: {fileID: 0}
+  openMenuSound: {fileID: 8300000, guid: 00b571274103bed43bc512e15750cf6e, type: 3}
+  closeMenuSound: {fileID: 8300000, guid: 2582e3bd34b9ca345abfd3dbf9be2a1a, type: 3}
+  openPinnySound: {fileID: 8300000, guid: 00b571274103bed43bc512e15750cf6e, type: 3}
+  closePinnySound: {fileID: 8300000, guid: 2582e3bd34b9ca345abfd3dbf9be2a1a, type: 3}
+  bossFightMusic: {fileID: 8300000, guid: a2f42190d600b3a4fbb770b529459494, type: 3}
+  wallList: []

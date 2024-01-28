@@ -22,7 +22,7 @@ public class DialogueFlowV2 : MonoBehaviour
     public List<AudioClip> pinnyAudio;
 
     private ButtonSelection currentSelection;
-
+    public AudioSource audioSource;
     private int dialogueIndex = 0;
     private FrasiDiPinny currentFrase;
     private bool isLastFrase = false;
@@ -111,7 +111,14 @@ public class DialogueFlowV2 : MonoBehaviour
         pinnySpeech.text = currentFrase.frasi[dialogueIndex].GetPrhase();
         if (currentFrase.frasi[dialogueIndex].sprite != null)
             pinnyimage.sprite = currentFrase.frasi[dialogueIndex].sprite;
-        GameManager.Instance.audioManager.PlayAudio(GetRandomAudio(pinnyAudio));
+        PlayPinnyAudio();
+        
+    }
+
+    private void PlayPinnyAudio()
+    {
+        audioSource.clip = GetRandomAudio(pinnyAudio);
+        audioSource.Play();
     }
 
     public void NextDialogue()
