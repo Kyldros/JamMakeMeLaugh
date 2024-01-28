@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb04a4861429be438e018c8b09c9d56, type: 3}
+  m_Name: Pinny_SecondTutorial
+  m_EditorClassIdentifier: 
+  frasi:
+  - frase:
+    - ' I''m your trusty and maybe a tad too eager  AI sidekick, Pinny'
+    sprite: {fileID: 0}
+  - frase:
+    - ' Well, hold onto your circuits, because it''s time to introduce you to the
+      wild world of ragdoll mechanics!'
+    sprite: {fileID: 0}
+  - frase:
+    - 'It''s like dancing with chaos itself! Here''s the lowdown:'
+    sprite: {fileID: 0}
+  - frase:
+    - When things get tight and narrow,
+    sprite: {fileID: 0}
+  - frase:
+    - and you're stuck like a pixelated sardine in a tin can,
+    sprite: {fileID: 0}
+  - frase:
+    - ragdoll mode is your best friend!
+    sprite: {fileID: 0}
+  - frase:
+    - Activate it like a mad scientist flipping the switch on their latest experiment
+      gone wrong!
+    sprite: {fileID: 0}
+  - frase:
+    - In case you didn't get it, Just press E! My friend!
+    sprite: {fileID: 0}
+  - frase:
+    - And you can bet tthat this will hurt like hell!!
+    sprite: {fileID: 0}
+  - frase:
+    - Why you ask? Well, all your joints will be broken!
+    sprite: {fileID: 0}
+  hasReply: 0
+  risposta1: {fileID: 11400000, guid: 1779713269c0761488b945ec55986eb6, type: 2}
+  risposta2: {fileID: 11400000, guid: d8b14474a38580d4391757d14b54d068, type: 2}
+  risposta3: {fileID: 11400000, guid: 767224df8e749944fa040916a6f1ff1d, type: 2}
