@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4325692619957452020}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: long platform 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,8 +43,7 @@ GameObject:
   - component: {fileID: 4545410386516341155}
   - component: {fileID: 8949706736194712214}
   - component: {fileID: 9049118291782122332}
-  - component: {fileID: 2134268816040781233}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: long_platform_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,24 +115,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2134268816040781233
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8520675704894184559}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.0395472, y: 0.3324998, z: 3.0657153}
-  m_Center: {x: 0, y: 0.00000008940697, z: 0}
