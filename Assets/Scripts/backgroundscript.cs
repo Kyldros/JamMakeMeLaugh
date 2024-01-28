@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class backgroundscript : MonoBehaviour
 {
+    public GameObject pivot;
     public Material material;
     public float velocityMultiplyier = 0.5f;
     private void Start()
@@ -13,6 +14,7 @@ public class backgroundscript : MonoBehaviour
 
     private void Update()
     {
+        transform.position = pivot.transform.position;
         float newOffset = GameManager.Instance.player.moveDirection.x;
         newOffset = newOffset * 0.1f * velocityMultiplyier;
         if(newOffset!=0)
