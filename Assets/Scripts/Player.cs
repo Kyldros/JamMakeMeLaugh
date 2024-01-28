@@ -81,7 +81,7 @@ public class Player : MonoBehaviour
 
     private List<Rigidbody> ragdollRb;
     private List<Collider> ragdollColl;
-    private Vector2 moveDirection;
+    public Vector2 moveDirection;
     private Vector3 lastMovement;
     public bool isRagdoll { get; private set; } = false;
     private bool isTPose = false;
