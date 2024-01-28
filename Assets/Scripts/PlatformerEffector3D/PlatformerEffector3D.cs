@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlatformerEffector3D : MonoBehaviour
 {
     public Collider platformColliderToDisable;
+    
 
     public void DisableCollider()
     {
