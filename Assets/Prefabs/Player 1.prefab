@@ -146,7 +146,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5336421963780641138}
-  - component: {fileID: 4440577400782091600}
   - component: {fileID: 6282676992680915365}
   - component: {fileID: 3355875214496760525}
   - component: {fileID: 7284100036396603837}
@@ -172,14 +171,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4764815622654840821}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4440577400782091600
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6411154875690941257}
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &6282676992680915365
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -256,6 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaa954e2d94617f43852917de1efaa50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pivot: {fileID: 0}
   material: {fileID: 0}
   velocityMultiplyier: 0.01
 --- !u!1 &7330927049846351987
@@ -331,6 +323,7 @@ MonoBehaviour:
   damage: 1
   damageIncreaser: 1
   immunityDuration: 0
+  onHitClip: {fileID: 0}
   audioManager: {fileID: 0}
   stepsClips: []
   clipsRagdoll: []
