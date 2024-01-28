@@ -22,7 +22,7 @@ public class Boss : MonoBehaviour
 
     private Vector3 playerPos;
 
-    private int currentHp;
+    public int currentHp;
     private Animator anim;
 
     private float timerAttack;
@@ -159,6 +159,7 @@ public class Boss : MonoBehaviour
 
         if (Vector3.Distance(arm.transform.position, arm.startPoint.transform.position) <= 0.2)
         {
+            arm.canTakeDamage = true;
             anim.enabled = true;
             arm.isAttacking = false;            
             SetArmEndAnimation(arm.isRight);

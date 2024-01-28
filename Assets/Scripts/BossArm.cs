@@ -20,6 +20,7 @@ public class BossArm : MonoBehaviour
     public GameObject pivot;
     public bool isRight;
     public AudioClip clipTestata;
+    public bool canTakeDamage = true;
     private void OnEnable()
     {
         coll = GetComponent<Collider>();
@@ -30,10 +31,12 @@ public class BossArm : MonoBehaviour
     {
         if(collision.gameObject.TryGetComponent<Player>(out Player player))
         {
-            Debug.Log("cacca");
-            if (player.isDashing && !isAttacking && boss.alive)
+            
+            if (player.isDashing && !isAttacking && boss.alive && canTakeDamage)
             {
+                Debug.Log(boss.currentHp);
                 GameManager.Instance.audioManager.PlayAudio(clipTestata);
+                canTakeDamage = false;
                 boss.TakeDamage(player.damage);
             }
         }
