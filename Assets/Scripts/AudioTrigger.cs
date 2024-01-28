@@ -7,6 +7,12 @@ public class AudioTrigger : MonoBehaviour
    public AudioManager audioManager;
    public AudioClip musicClip;
 
+
+    private void Start()
+    {
+        audioManager = GameManager.Instance.audioManager;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.TryGetComponent<Player>(out Player player))

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,10 +17,12 @@ public class GameManager : MonoBehaviour
     public AudioClip openPinnySound;
     public AudioClip closePinnySound;
     public AudioClip bossFightMusic;
+    public AudioSource pinnyMusic;
+    public AudioSource normalMusic;
 
     public List<TriggerWall> wallList = new();
 
-    private bool gameEnded=false;
+    private bool gameEnded = false;
 
     InputScheme playScheme = InputScheme.Player;
 
@@ -47,11 +48,46 @@ public class GameManager : MonoBehaviour
 
     public void TriggerWalls(bool value)
     {
-        foreach (TriggerWall wall in wallList) 
-        { 
+        foreach (TriggerWall wall in wallList)
+        {
             wall.gameObject.GetComponent<Collider>().enabled = value;
         }
     }
+
+
+    public void SetPinnyMusic()
+    {
+
+        if (normalMusic.isPlaying)
+        {
+            normalMusic.Pause();
+        }
+        if (!pinnyMusic.isPlaying)
+        {
+            pinnyMusic.Play();
+        }
+        else
+        {
+            pinnyMusic.UnPause();
+        }
+
+    }
+    public void SetNormalMusic()
+    {
+        if (pinnyMusic.isPlaying)
+        {
+            pinnyMusic.Pause();
+        }
+        if (!normalMusic.isPlaying)
+        {
+            normalMusic.Play();
+        }
+        else
+        {
+            normalMusic.UnPause();
+        }
+    }
+
     public void OpenPinny()
     {
         if (pinny != null && !pinny.gameObject.activeInHierarchy)
@@ -59,6 +95,8 @@ public class GameManager : MonoBehaviour
             pinny.gameObject.SetActive(true);
             ChangeInputScheme(InputScheme.PinnyDialogue);
             audioManager.PlayAudio(openPinnySound);
+
+            SetPinnyMusic();
         }
     }
     public void ClosePinny()
@@ -68,18 +106,20 @@ public class GameManager : MonoBehaviour
             pinny.gameObject.SetActive(false);
             ChangeInputScheme(InputScheme.Player);
             audioManager.PlayAudio(closePinnySound);
+
+            SetNormalMusic();
         }
     }
     public void ChangeInputScheme(InputScheme scheme)
     {
         playerInput.SwitchCurrentActionMap(scheme.ToString());
-        if(scheme == InputScheme.Player)
+        if (scheme == InputScheme.Player)
         {
             SetPauseOff();
         }
         else
         {
-            SetPauseOn();   
+            SetPauseOn();
         }
 
         if (scheme != InputScheme.Menu)
@@ -98,13 +138,15 @@ public class GameManager : MonoBehaviour
     }
     public void CloseMenu()
     {
-        if (menu != null && menu.gameObject.activeInHierarchy && !gameEnded) 
-        { 
+        if (menu != null && menu.gameObject.activeInHierarchy && !gameEnded)
+        {
             menu.gameObject.SetActive(false);
             ChangeInputScheme(playScheme);
             SetCursorOff();
             SetIputActionState(true);
             audioManager.PlayAudio(closeMenuSound);
+
+            SetNormalMusic();
         }
     }
     public void SetCursorOn()
@@ -133,7 +175,7 @@ public class GameManager : MonoBehaviour
 
         if (actionToDisable != null)
         {
-            if(active)
+            if (active)
                 actionToDisable.Enable();
             else
                 actionToDisable.Disable();
@@ -150,9 +192,9 @@ public class GameManager : MonoBehaviour
     {
         isPaused = false;
         Time.timeScale = 1f;
-        
+
     }
-    
+
     public void DisablePlayerInput()
     {
         playerInput.SwitchCurrentActionMap(InputScheme.Disable.ToString());
