@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
     public int damage = 1;
     public int damageIncreaser = 1;
     public float immunityDuration;
+    [SerializeField] private AudioClip onHitClip;
 
     [Header("Audio")]
     public AudioManager audioManager;
@@ -375,6 +376,7 @@ public class Player : MonoBehaviour
         if (canTakeDamage)
         {
             currentHP -= damage;
+            audioManager.PlayAudio(onHitClip);
             Debug.Log(currentHP);
             if (currentHP <= 0)
                 onDeath?.Invoke();
